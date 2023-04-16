@@ -1,0 +1,12 @@
+.regionSidebar {
+  display: flex;
+  flex-direction: row;
+}
+
+.regionContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+

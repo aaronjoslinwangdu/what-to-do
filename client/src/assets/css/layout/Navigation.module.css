@@ -1,0 +1,30 @@
+.navigation {
+  width: 100%;
+  height: 8%;
+  background-color: #565656;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12.5px;
+  padding-bottom: 12.5px;
+}
+
+.brand {
+  margin-left: 1.25%;
+  font-family: 'Roboto Slab', serif;
+  font-size: 2.25rem;
+  font-weight: 500;
+}
+
+.what {
+  color: #a0e77f;
+}
+
+.to {
+  color: #6bb0d8;
+}
+
+.do {
+  color: #e4be42;
+}
