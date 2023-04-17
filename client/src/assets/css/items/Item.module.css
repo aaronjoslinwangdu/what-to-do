@@ -1,0 +1,21 @@
+.item {
+  background-color: #6d6d6d;
+  height: 75px;
+  border: 2px solid rgb(175, 175, 175);
+  margin: 1.5rem 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.itemLabel {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.itemDesc {
+  line-height: 1em;
+  height: 2em;
+  overflow: hidden;
+}
