@@ -68,6 +68,24 @@ const createItem = async (req, res) => {
 }
 
 
+// @desc    Update a user
+// @route   PUT /api/item/:id
+const updateItem = async (req, res) => {
+
+  const item = await Item.findById(req.params.id);
+
+  if (!item) {
+    res.status(400);
+    throw new Error('Item not found');
+  }
+
+  const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+  res.status(200).json(updatedItem);
+
+}
+
+
 // @desc    Delete item
 // @route   DEL /api/item/:id
 const deleteItem = async (req, res) => {
@@ -92,5 +110,6 @@ module.exports = {
   getItems,
   getUserItems,
   createItem,
+  updateItem,
   deleteItem
 }
