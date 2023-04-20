@@ -3,11 +3,13 @@ const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 const connectDatabase = require('./config/db');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 connectDatabase();
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
