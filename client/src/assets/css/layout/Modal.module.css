@@ -5,7 +5,7 @@
   width: 100%;
   height: 100vh;
   z-index: 20;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(42, 53, 75, 0.75);
 }
 
 .modal {
@@ -13,9 +13,10 @@
   top: 15vh;
   left: 50vh;
   width: 40%;
-  background-color: #EAEAEA;
+  background-color: #ffffff;
   padding: 2rem 3rem 1rem 3rem;
   border-radius: 14px;
+  border: 2px solid #5f5f5fda;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
   animation: slide-down 300ms ease-out forwards;
