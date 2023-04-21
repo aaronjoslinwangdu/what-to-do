@@ -1,0 +1,14 @@
+.columnLabel {
+  font-weight: 600;
+  color: #494949;
+  margin-left: 25px;
+  margin-top: 25px;
+}
+
+.mainColumn {
+  height: 100%;
+  width: 33%;
+  margin: 5px;
+  background-color: #eeecec;
+  border-radius: 5px;
+}

@@ -7,7 +7,7 @@ export const getItems = async () => {
     const items = response.data;
     return items;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.data.response);
   }
 }
 
@@ -18,7 +18,7 @@ export const getItem = async (id) => {
     const item = response.data;
     return item;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.data.response);
   }
 }
 
@@ -32,7 +32,7 @@ export const addItem = async (item) => {
     const addedItem = response.data;
     return addedItem;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.data.response);
   }
 } 
 
@@ -49,7 +49,7 @@ export const updateItem = async (item) => {
     const updatedItem = response.data;
     return updatedItem;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.data.response);
   }
 } 
 
@@ -60,6 +60,6 @@ export const deleteItem = async (id) => {
     const deletedId = response.data.id;
     return (`Deleted ${deletedId}`);
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.data.response);
   }
 }
