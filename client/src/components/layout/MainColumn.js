@@ -8,10 +8,7 @@ import Item from '../items/Item';
 
 
 const MainColumn = (props) => {
-
   const items = props.items;
-
-  console.log(items);
 
   let itemList = [];
   itemList = items.map((itemObj) => {

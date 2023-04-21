@@ -1,24 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Styles
 import styles from '../../assets/css/layout/Modal.module.css';
 
 // Components 
-import { hideAddItemForm } from '../../store/layout/layoutSlice';
+import { hideAddItemForm, hideDeleteItemForm } from '../../store/layout/layoutSlice';
 
 
 
 const Modal = (props) => {
   const dispatch = useDispatch();
 
-  const hideAddItemFormHandler = () => {
+  const hideModalHandler = () => {
     dispatch(hideAddItemForm());
+    dispatch(hideDeleteItemForm());
   }
 
   const Backdrop = (props) => {
-    return <div className={styles.backdrop} onClick={hideAddItemFormHandler}/>;
+    return <div className={styles.backdrop} onClick={hideModalHandler}/>;
   };
   
   const ModalOverlay = (props) => {

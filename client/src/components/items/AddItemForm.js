@@ -41,6 +41,7 @@ const AddItemForm = () => {
     console.log('submitted');
     console.log(formState);
     addItem(formState);
+    dispatch(hideAddItemForm());
   }
   
 

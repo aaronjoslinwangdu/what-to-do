@@ -1,0 +1,40 @@
+.deleteItemsForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.warning {
+  font-family: 'Roboto';
+  font-weight: 900;
+  font-size: 24px;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.delete {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #c23535;
+  color: white;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.cancel {
+  margin-right: 20px;
+}
+
+.cancel:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

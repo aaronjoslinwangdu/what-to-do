@@ -32,7 +32,6 @@ const Main = () => {
     getItemList();
   }, []);
 
-  console.log(items);
 
   let itemsColumns = [[],[],[]];
   if (items.length !== 0) {
@@ -41,10 +40,9 @@ const Main = () => {
     }
   }
 
-
+  
   let columns = [];
   columns = itemsColumns.map((itemsInCol, index) => {
-    console.log(index);
 
     let columnLabel;
     switch(index) {
@@ -57,9 +55,6 @@ const Main = () => {
 
   });
 
-
-  console.log(itemsColumns);
-  console.log(columns);
 
   return (
     <div className={styles.main}>
