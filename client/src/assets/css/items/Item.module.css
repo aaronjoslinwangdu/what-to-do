@@ -16,7 +16,7 @@
   justify-content: flex-start;
   align-items: baseline;
   margin-bottom: 5px;
-  gap: 10px;
+  gap: 20px;
 }
 
 .itemLabel {
@@ -25,8 +25,21 @@
   font-weight: 900;
 }
 
+.itemDelete {
+  color:#858585;
+}
+
 .itemDelete:hover {
-  color: red;
+  color: #c23535;
+  cursor: pointer;
+}
+
+.itemEdit {
+  color:#858585;
+}
+
+.itemEdit:hover {
+  color: #4c6faf;
   cursor: pointer;
 }
 

@@ -12,7 +12,7 @@
   padding-top: 0.75rem;
   white-space: nowrap;
   overflow-x: hidden;
-  border-right: 2px solid #5f5f5f38;
+  border-right: 1px solid #5f5f5f38;
 }
 
 .sidebar:hover {
@@ -31,8 +31,8 @@
   margin-bottom: 1rem;
   padding-left: .9rem;
   align-items: center;
-  border-top: 2px solid #bdc8ff6c;
-  border-bottom: 2px solid #bdc8ff6c;
+  border-top: 1px solid #bdc8ff6c;
+  border-bottom: 1px solid #bdc8ff6c;
 }
 
 .sidebarItem:hover {
