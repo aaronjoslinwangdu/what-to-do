@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 // Styles
@@ -13,6 +13,10 @@ import { showDeleteItemForm, setItemToDelete } from '../../store/layout/layoutSl
 const Item = (props) => {
   const dispatch = useDispatch();
   const item = props.item;
+  const [isEditingLabel, setIsEditingLabel] = useState(false);
+  const [isEditingDesc, setIsEditingDesc] = useState(false);
+  const [label, setLabel] = useState(item.label);
+  const [description, setDescription] = useState(item.description);
 
   const deleteItemHandler = () => {
     dispatch(showDeleteItemForm());
@@ -20,13 +24,21 @@ const Item = (props) => {
   }
 
   const editItemHandler = () => {
-    console.log('hi');
+    setIsEditingLabel(!isEditingLabel);
   }
+
+  const changeLabelHandler = (event) => {
+    setLabel(event.target.value);
+    console.log(label)
+  }
+
+
 
   return (
     <div className={styles.item}>
       <div className={styles.itemHeader}>
-        <div className={styles.itemLabel}>{item.label}</div>
+        {!isEditingLabel && <div className={styles.itemLabel}>{label}</div>}
+        {isEditingLabel && <input className={styles.editLabel} type="text" value={label} onChange={changeLabelHandler}></input>}
         <FontAwesomeIcon 
           className={styles.itemEdit}
           onClick={editItemHandler}
