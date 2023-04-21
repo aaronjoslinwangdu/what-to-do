@@ -58,7 +58,7 @@ export const deleteItem = async (id) => {
   try {
     const response = await axios.delete(`http://localhost:3001/api/item/${id}`);
     const deletedId = response.data.id;
-    return (`Deleted ${deletedId}`);
+    return deletedId;
   } catch (error) {
     throw new Error(error.data.response);
   }

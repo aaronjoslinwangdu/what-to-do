@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { itemActions } from '../../store/items/itemSlice';
 
 // Styles
 import styles from '../../assets/css/items/DeleteItemForm.module.css';
@@ -18,9 +19,10 @@ const DeleteItemForm = (props) => {
     dispatch(setItemToDelete(null));
   }
 
-  const deleteHandler = (event) => {
+  const deleteHandler = async (event) => {
     event.preventDefault()
-    deleteItem(itemToDelete);
+    const deletedItemId = await deleteItem(itemToDelete);
+    dispatch(itemActions.deleteItem(deletedItemId));
     dispatch(hideDeleteItemForm());
     dispatch(setItemToDelete(null));
   }

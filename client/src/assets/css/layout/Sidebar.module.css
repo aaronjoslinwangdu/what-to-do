@@ -38,8 +38,8 @@
 .sidebarItem:hover {
   background-color: #a8ceff;
   color: #3250a1;
-  border-top: 2px solid #5f5f5f38;
-  border-bottom: 2px solid #5f5f5f38;
+  border-top: 1px solid #5f5f5f38;
+  border-bottom: 1px solid #5f5f5f38;
 }
 
 .sidebarItemLabel {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem, getItem } from '../../utils/Api';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../utils/Api';
+import { itemActions } from '../../store/items/itemSlice';
 
 // Styles
 import styles from '../../assets/css/items/AddItemForm.module.css';
@@ -36,11 +37,12 @@ const AddItemForm = () => {
    
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     console.log('submitted');
     console.log(formState);
-    addItem(formState);
+    const addedItem = await addItem(formState);
+    dispatch(itemActions.addItem(addedItem));
     dispatch(hideAddItemForm());
   }
   

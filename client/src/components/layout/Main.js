@@ -1,36 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { getItems, getItem, updateItem, deleteItem } from '../../utils/Api';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getItems } from '../../utils/Api';
+import { itemActions } from '../../store/items/itemSlice';
 
 // Styles
 import styles from '../../assets/css/layout/Main.module.css';
 
 // Components
-import Item from '../items/Item';
 import MainColumn from './MainColumn';
-
-const DUMMY_ITEM = {
-  _id: '6441b25cb5f8079b70f34e1f',
-  label: 'dummy',
-  description: 'dummy desc',
-  date: '04-20-2023',
-  userId: 1,
-  folder: 2,
-  status: 2
-}
 
 
 // should get items in this component
 const Main = () => {
-
-  const [items, setItems] = useState([]);
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.item.items);
 
   useEffect(() => {
     const getItemList = async () => {
       const itemList = await getItems();
-      setItems(itemList);
+      dispatch(itemActions.setItems(itemList));
     }
     getItemList();
-  }, []);
+  }, [items]);
 
 
   let itemsColumns = [[],[],[]];
