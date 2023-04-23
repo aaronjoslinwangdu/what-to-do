@@ -29,7 +29,7 @@ const Item = (props) => {
 
   const deleteItemHandler = () => {
     dispatch(showDeleteItemForm());
-    dispatch(setItemToDelete(item._id));
+    dispatch(setItemToDelete(item));
   }
 
   const editItemHandler = () => {

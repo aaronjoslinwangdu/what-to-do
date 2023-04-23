@@ -7,6 +7,15 @@
   font-family: 'Roboto';
   font-weight: 900;
   font-size: 24px;
+  display: inline;
+}
+
+.warningLabel {
+  font-family: 'Roboto';
+  font-weight: 900;
+  font-size: 24px;
+  font-style: italic;
+  display: inline;
 }
 
 .options {

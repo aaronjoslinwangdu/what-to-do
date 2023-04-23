@@ -21,7 +21,7 @@ const DeleteItemForm = (props) => {
 
   const deleteHandler = async (event) => {
     event.preventDefault()
-    const deletedItemId = await deleteItem(itemToDelete);
+    const deletedItemId = await deleteItem(itemToDelete._id);
     dispatch(itemActions.deleteItem(deletedItemId));
     dispatch(hideDeleteItemForm());
     dispatch(setItemToDelete(null));
@@ -29,7 +29,8 @@ const DeleteItemForm = (props) => {
 
   return (
     <div className={styles.deleteItemForm}>
-      <div className={styles.warning}>Are you sure that you want to DELETE this item?</div>
+      <div className={styles.warning}>Are you sure you want to delete </div>
+      <div className={styles.warningLabel}>{itemToDelete.label}?</div>
       <div className={styles.options}>
         <div className={styles.cancel} onClick={cancelHandler}>Cancel</div>
         <button className={styles.delete} onClick={deleteHandler}>Delete</button>
