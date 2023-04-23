@@ -6,7 +6,14 @@ import styles from '../../assets/css/items/Item.module.css';
 
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan, faPenToSquare, faSquareCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faTrashCan, 
+  faPenToSquare, 
+  faSquareCheck, 
+  faXmark, 
+  faChevronLeft, 
+  faChevronRight 
+} from '@fortawesome/free-solid-svg-icons'
 import { showDeleteItemForm, setItemToDelete } from '../../store/layout/layoutSlice';
 import { updateItem } from '../../utils/Api';
 import { itemActions } from '../../store/items/itemSlice';
@@ -61,73 +68,104 @@ const Item = (props) => {
     setIsEditingDesc(false);
   }
 
+  const moveItemLeftHandler = async () => {
+    if (item.status !== 0) {
+      let tempItem = {...item, status: item.status - 1};
+      const savedItem = await updateItem(tempItem);
+      dispatch(itemActions.updateItem(savedItem));
+    }
+  }
+
+  const moveItemRightHandler = async () => {
+    if (item.status !== 2) {
+      let tempItem = {...item, status: item.status + 1};
+      const savedItem = await updateItem(tempItem);
+      dispatch(itemActions.updateItem(savedItem));
+    }
+  }
+
+
+  const leftStyles = item.status !== 0 ? `${styles.itemNavEnabled}` : `${styles.itemNavDisabled}`;
+  const rightStyles = item.status !== 2 ? `${styles.itemNavEnabled}` : `${styles.itemNavDisabled}`;
+  const leftNavSection = item.status !== 0 ? `${styles.navSectionEnabled}` : `${styles.navSectionDisabled}`;
+  const rightNavSection = item.status !== 2 ? `${styles.navSectionEnabled}` : `${styles.navSectionDisabled}`;
 
   return (
     <div className={styles.item}>
-      <div className={styles.itemHeader}>
-        {!isEditingLabel && 
-          <div 
-            className={styles.itemLabel} 
-            onClick={editLabelHandler}
-          >
-            {item.label}
-          </div>
-        }
-        {isEditingLabel && 
-          <input 
-            className={styles.editLabel} 
-            type="text" 
-            name="label"
-            value={item.label} 
-            onChange={changeHandler}
-          >
-          </input>
-        }
-
-        {!isEditingDesc && !isEditingLabel &&
-          <FontAwesomeIcon 
-            className={styles.itemEdit}
-            onClick={editItemHandler}
-            icon={faPenToSquare} 
-          />
-        }
-        {(isEditingDesc || isEditingLabel) &&
-          <Fragment>
-            <FontAwesomeIcon
-              className={styles.itemCancel}
-              onClick={cancelHandler}
-              icon={faXmark}
-            />
-            <FontAwesomeIcon 
-              className={styles.itemSave}
-              onClick={saveItemHandler}
-              icon={faSquareCheck} 
-            />
-          </Fragment>
-        }
-        <FontAwesomeIcon 
-          className={styles.itemDelete} 
-          onClick={deleteItemHandler}
-          icon={faTrashCan} 
-        />
+      <div className={leftNavSection} onClick={moveItemLeftHandler}>
+        <FontAwesomeIcon className={leftStyles} icon={faChevronLeft} />
       </div>
-      {!isEditingDesc &&
-        <div 
-          className={styles.itemDesc}
-          onClick={editDescriptionHandler}
-        >
-          {item.description}
+      <div className={styles.itemContent}>
+        <div className={styles.itemHeader}>
+          {!isEditingLabel && 
+            <div 
+              className={styles.itemLabel} 
+              onClick={editLabelHandler}
+            >
+              {item.label}
+            </div>
+          }
+          {isEditingLabel && 
+            <input 
+              className={styles.editLabel} 
+              type="text" 
+              name="label"
+              value={item.label} 
+              onChange={changeHandler}
+            >
+            </input>
+          }
+
+          {!isEditingDesc && !isEditingLabel &&
+            <FontAwesomeIcon 
+              className={styles.itemEdit}
+              onClick={editItemHandler}
+              icon={faPenToSquare} 
+            />
+          }
+          {(isEditingDesc || isEditingLabel) &&
+            <Fragment>
+              <FontAwesomeIcon
+                className={styles.itemCancel}
+                onClick={cancelHandler}
+                icon={faXmark}
+              />
+              <FontAwesomeIcon 
+                className={styles.itemSave}
+                onClick={saveItemHandler}
+                icon={faSquareCheck} 
+              />
+            </Fragment>
+          }
+          <FontAwesomeIcon 
+            className={styles.itemDelete} 
+            onClick={deleteItemHandler}
+            icon={faTrashCan} 
+          />
         </div>
-      }
-      {isEditingDesc &&
-        <input 
-          className={styles.editDescription} 
-          type="text" value={item.description} 
-          name="description"
-          onChange={changeHandler}
-        >
-        </input>
-      }
+        <div>
+          {!isEditingDesc &&
+            <div 
+              className={styles.itemDesc}
+              onClick={editDescriptionHandler}
+            >
+              {item.description}
+            </div>
+          }
+          {isEditingDesc &&
+            <input 
+              className={styles.editDescription} 
+              type="text" value={item.description} 
+              name="description"
+              onChange={changeHandler}
+            >
+            </input>
+          }
+        </div>
+      </div>
+      <div className={rightNavSection} onClick={moveItemRightHandler}>
+        <FontAwesomeIcon className={rightStyles} icon={faChevronRight} />
+      </div>
     </div>
   );
 };
