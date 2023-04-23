@@ -151,3 +151,15 @@
   flex: 1;
   width: 100%;
 }
+
+.editStatus {
+  color: #494949;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #ececec;
+  padding: 3px 6px;
+  border: 2px solid #5f5f5f2c;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

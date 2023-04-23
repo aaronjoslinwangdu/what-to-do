@@ -25,6 +25,7 @@ const Item = (props) => {
   const [uneditedItem, setUneditedItem] = useState(item);
   const [isEditingLabel, setIsEditingLabel] = useState(false);
   const [isEditingDesc, setIsEditingDesc] = useState(false);
+  const [isEditingStatus, setIsEditingStatus] = useState(false);
 
   const deleteItemHandler = () => {
     dispatch(showDeleteItemForm());
@@ -35,6 +36,7 @@ const Item = (props) => {
     setUneditedItem(item);
     setIsEditingLabel(true);
     setIsEditingDesc(true);
+    setIsEditingStatus(true);
   }
 
 
@@ -59,13 +61,15 @@ const Item = (props) => {
     setItem(uneditedItem);
     setIsEditingLabel(false);
     setIsEditingDesc(false);
+    setIsEditingStatus(false);
   }
   
   const saveItemHandler = async () => {
     const savedItem = await updateItem(item);
-    dispatch(itemActions.updateItem(savedItem));
     setIsEditingLabel(false);
     setIsEditingDesc(false);
+    setIsEditingStatus(false);
+    dispatch(itemActions.updateItem(savedItem));
   }
 
   const moveItemLeftHandler = async () => {
@@ -115,7 +119,19 @@ const Item = (props) => {
             >
             </input>
           }
-
+          {isEditingStatus &&
+            <select 
+              name='status' 
+              id='status'
+              value={item.status}
+              onChange={changeHandler}
+              className={styles.editStatus}
+            >
+              <option value={0}>To Do</option>
+              <option value={1}>In Progress</option>
+              <option value={2}>Done</option>
+            </select>
+          }
           {!isEditingDesc && !isEditingLabel &&
             <FontAwesomeIcon 
               className={styles.itemEdit}
@@ -155,7 +171,8 @@ const Item = (props) => {
           {isEditingDesc &&
             <input 
               className={styles.editDescription} 
-              type="text" value={item.description} 
+              type="text" 
+              value={item.description} 
               name="description"
               onChange={changeHandler}
             >
