@@ -20,6 +20,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use('/api/item', require('./routes/ItemRoutes'));
+app.use('/api/user', require('./routes/UserRoutes'));
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
