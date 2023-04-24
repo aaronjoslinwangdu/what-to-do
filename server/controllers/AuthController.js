@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/UserModel');
+const RefreshToken = require('../models/RefreshTokenModel');
 
 
 // @desc    Log user in
@@ -26,7 +27,7 @@ const login = async (req, res) => {
   const accessToken = jwt.sign(
     { 'email': user.email }, 
     process.env.ACCESS_TOKEN_SECRET, 
-    { expiresIn: '1m' }
+    { expiresIn: '5m' }
   );
 
   const refreshToken = jwt.sign(
@@ -34,6 +35,8 @@ const login = async (req, res) => {
     process.env.REFRESH_TOKEN_SECRET, 
     { expiresIn: '1d' }
   );
+
+  await RefreshToken.create({ token: refreshToken, userId: user._id });
 
   res.cookie('jwt', refreshToken, {
     httpOnly: true,                    // set back to true when using https
@@ -49,21 +52,27 @@ const login = async (req, res) => {
 // @route   POST /auth/logout
 const logout = async (req, res) => {
 
+  // on client, also delete the accessToken IN FRONTEND !!!!
+
   const cookies = req.cookies;
-  if (!cookies?.jwt) {
-    return res.status(204);
+  if (!cookies?.jwt) return res.sendStatus(204);
+
+  const refreshToken = cookies.jwt;
+
+  const foundToken = await RefreshToken.findOne({ token: refreshToken }).exec();
+  const foundUser = await User.find({ _id: foundToken.userId.toString() });
+
+  if (!foundUser) {
+    res.clearCookie('jwt', { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+    return res.sendStatus(204);
   }
 
-  res.clearCookie('jwt', {
-    httpOnly: false,
-    secure: false,
-    sameSite: 'None'
-  });
+  await RefreshToken.deleteOne({ token: refreshToken });
 
-  res.json({ message: 'Cookie cleared' });
+  res.clearCookie('jwt', { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+  res.sendStatus(204);
 
 }
-
 
 
 module.exports = {
