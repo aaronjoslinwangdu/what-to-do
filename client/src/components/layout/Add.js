@@ -7,14 +7,14 @@ import styles from '../../assets/css/layout/Sidebar.module.css';
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { showAddItemForm } from '../../store/layout/layoutSlice';
+import { layoutActions } from '../../store/layout/layoutSlice';
 
 
 const Add = (props) => {
   const dispatch = useDispatch();
 
   const addItemHandler = () => {
-    dispatch(showAddItemForm());
+    dispatch(layoutActions.showAddItemForm());
   }
 
   return (

@@ -14,7 +14,7 @@ import {
   faChevronLeft, 
   faChevronRight 
 } from '@fortawesome/free-solid-svg-icons'
-import { showDeleteItemForm, setItemToDelete } from '../../store/layout/layoutSlice';
+import { layoutActions } from '../../store/layout/layoutSlice';
 import { updateItem } from '../../utils/Api';
 import { itemActions } from '../../store/items/itemSlice';
 
@@ -28,8 +28,8 @@ const Item = (props) => {
   const [isEditingStatus, setIsEditingStatus] = useState(false);
 
   const deleteItemHandler = () => {
-    dispatch(showDeleteItemForm());
-    dispatch(setItemToDelete(item));
+    dispatch(layoutActions.showDeleteItemForm());
+    dispatch(layoutActions.setItemToDelete(item));
   }
 
   const editItemHandler = () => {

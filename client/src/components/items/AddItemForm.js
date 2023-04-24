@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addItem } from '../../utils/Api';
-import { itemActions } from '../../store/items/itemSlice';
 
 // Styles
 import styles from '../../assets/css/items/AddItemForm.module.css';
 
 // Components 
-import { hideAddItemForm } from '../../store/layout/layoutSlice';
+import { addItem } from '../../utils/Api';
+import { itemActions } from '../../store/items/itemSlice';
+import { layoutActions } from '../../store/layout/layoutSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
@@ -26,7 +26,7 @@ const AddItemForm = () => {
 
   const cancelHandler = (event) => {
     event.preventDefault();
-    dispatch(hideAddItemForm());
+    dispatch(layoutActions.hideAddItemForm());
   }
 
   const changeHandler = (event) => {
@@ -43,7 +43,7 @@ const AddItemForm = () => {
     console.log(formState);
     const addedItem = await addItem(formState);
     dispatch(itemActions.addItem(addedItem));
-    dispatch(hideAddItemForm());
+    dispatch(layoutActions.hideAddItemForm());
   }
   
 

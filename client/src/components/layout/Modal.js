@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../assets/css/layout/Modal.module.css';
 
 // Components 
-import { hideAddItemForm, hideDeleteItemForm } from '../../store/layout/layoutSlice';
+import { layoutActions } from '../../store/layout/layoutSlice';
 
 
 
@@ -14,8 +14,8 @@ const Modal = (props) => {
   const dispatch = useDispatch();
 
   const hideModalHandler = () => {
-    dispatch(hideAddItemForm());
-    dispatch(hideDeleteItemForm());
+    dispatch(layoutActions.hideAddItemForm());
+    dispatch(layoutActions.hideDeleteItemForm());
   }
 
   const Backdrop = (props) => {

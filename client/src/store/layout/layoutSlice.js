@@ -6,6 +6,7 @@ export const layoutSlice = createSlice({
     sidebarHover: false,
     showAddItemForm: false,
     showDeleteItemForm: false,
+    showLoginForm: false,
     itemToDelete: null,
   },
   reducers: {
@@ -27,20 +28,18 @@ export const layoutSlice = createSlice({
     hideDeleteItemForm: state => {
       state.showDeleteItemForm = false;
     },
+    showLoginForm: state => {
+      state.showLoginForm = true;
+    },
+    hideLoginForm: state => {
+      state.showLoginForm = false;
+    },
     setItemToDelete: (state, action) => {
       state.itemToDelete = action.payload;
     }
   }
 });
 
-export const { 
-  sidebarHovered, 
-  sidebarNotHovered,
-  showAddItemForm,
-  hideAddItemForm,
-  showDeleteItemForm,
-  hideDeleteItemForm,
-  setItemToDelete,
-} = layoutSlice.actions;
+export const layoutActions = layoutSlice.actions;
 
 export default layoutSlice;
