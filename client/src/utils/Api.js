@@ -69,7 +69,7 @@ export const deleteItem = async (id) => {
 }
 
 
-// USERS
+// AUTH
 
 export const loginUser = async (username, email, password) => {
   try {
@@ -79,6 +79,8 @@ export const loginUser = async (username, email, password) => {
   }
 }
 
+
+// USERS
 
 export const getUser = async (id) => {
   try {

@@ -5,9 +5,9 @@ import styles from '../../assets/css/layout/Brand.module.css';
 const Brand = () => {
   return (
     <div className={styles.brand}>
-      <span className={styles.what}>W</span>
-      <span className={styles.to}>T</span>
-      <span className={styles.do}>D</span>
+      <span className={styles.what}>What</span>
+      <span className={styles.to}>To</span>
+      <span className={styles.do}>Do</span>
     </div>
   );
 };

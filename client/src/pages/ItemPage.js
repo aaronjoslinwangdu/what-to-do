@@ -11,17 +11,21 @@ import Sidebar from '../components/layout/Sidebar';
 import Modal from '../components/layout/Modal';
 import AddItemForm from '../components/items/AddItemForm';
 import DeleteItemForm from '../components/items/DeleteItemForm';
+import LoginForm from '../components/users/LoginForm';
 
 
 const ItemPage = () => {
   const showAddItemForm = useSelector(state => state.layout.showAddItemForm);
   const showDeleteItemForm = useSelector(state => state.layout.showDeleteItemForm);
+  const showLoginForm = useSelector(state => state.layout.showLoginForm);
 
   let modal;
-  if (showAddItemForm && !showDeleteItemForm) {
+  if (showAddItemForm) {
     modal = <Modal><AddItemForm /></Modal>;
-  } else if (showDeleteItemForm && !showAddItemForm) {
-    modal = <Modal><DeleteItemForm /></Modal>
+  } else if (showDeleteItemForm) {
+    modal = <Modal><DeleteItemForm /></Modal>;
+  } else if (showLoginForm) {
+    modal = <Modal><LoginForm /></Modal>
   }
 
   return (

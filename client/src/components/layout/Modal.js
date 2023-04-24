@@ -16,6 +16,7 @@ const Modal = (props) => {
   const hideModalHandler = () => {
     dispatch(layoutActions.hideAddItemForm());
     dispatch(layoutActions.hideDeleteItemForm());
+    dispatch(layoutActions.hideLoginForm());
   }
 
   const Backdrop = (props) => {

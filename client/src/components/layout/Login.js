@@ -7,19 +7,19 @@ import styles from '../../assets/css/layout/Sidebar.module.css';
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
-import { showLoginForm } from '../../store/layout/layoutSlice';
+import { layoutActions } from '../../store/layout/layoutSlice';
 
 
 const Login = () => {
   const dispatch = useDispatch();
 
   const loginHandler = () => {
-    dispatch(showLoginForm());
+    dispatch(layoutActions.showLoginForm());
   }
 
   return (
     <div className={styles.sidebarItem} onClick={loginHandler}>
-      <FontAwesomeIcon icon={faRightToBracket} />
+      <FontAwesomeIcon icon={faRightToBracket} size='2x'/>
       <div className={styles.sidebarItemLabel}>Login</div>
     </div>
   );
