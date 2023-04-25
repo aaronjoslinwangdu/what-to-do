@@ -12,20 +12,24 @@ import Modal from '../components/layout/Modal';
 import AddItemForm from '../components/items/AddItemForm';
 import DeleteItemForm from '../components/items/DeleteItemForm';
 import LoginForm from '../components/users/LoginForm';
+import RegisterForm from '../components/users/RegisterForm';
 
 
 const ItemPage = () => {
   const showAddItemForm = useSelector(state => state.layout.showAddItemForm);
   const showDeleteItemForm = useSelector(state => state.layout.showDeleteItemForm);
   const showLoginForm = useSelector(state => state.layout.showLoginForm);
+  const showRegisterForm = useSelector(state => state.layout.showRegisterForm);
 
   let modal;
   if (showAddItemForm) {
-    modal = <Modal><AddItemForm /></Modal>;
+    modal = <Modal><AddItemForm /></Modal>
   } else if (showDeleteItemForm) {
-    modal = <Modal><DeleteItemForm /></Modal>;
+    modal = <Modal><DeleteItemForm /></Modal>
   } else if (showLoginForm) {
     modal = <Modal><LoginForm /></Modal>
+  } else if (showRegisterForm) {
+    modal = <Modal><RegisterForm /></Modal>
   }
 
   return (

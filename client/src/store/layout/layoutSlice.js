@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  sidebarHover: false,
+  showAddItemForm: false,
+  showDeleteItemForm: false,
+  showLoginForm: false,
+  showRegisterForm: false,
+  itemToDelete: null,
+}
+
 export const layoutSlice = createSlice({
   name: 'layout',
-  initialState: {
-    sidebarHover: false,
-    showAddItemForm: false,
-    showDeleteItemForm: false,
-    showLoginForm: false,
-    itemToDelete: null,
-  },
+  initialState: initialState,
   reducers: {
     sidebarHovered: state => {
       state.sidebarHover = true;
@@ -33,6 +36,12 @@ export const layoutSlice = createSlice({
     },
     hideLoginForm: state => {
       state.showLoginForm = false;
+    },
+    showRegisterForm: state => {
+      state.showRegisterForm = true;
+    },
+    hideRegisterForm: state => {
+      state.showRegisterForm = false;
     },
     setItemToDelete: (state, action) => {
       state.itemToDelete = action.payload;

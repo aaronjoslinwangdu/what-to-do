@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getItems } from '../../utils/Api';
-import { itemActions } from '../../store/items/itemSlice';
 
 // Styles
 import styles from '../../assets/css/layout/Main.module.css';
 
 // Components
 import MainColumn from './MainColumn';
+import { getItems } from '../../utils/Api';
+import { itemActions } from '../../store/items/itemSlice';
+import { sessionActions } from '../../store/session/sessionSlice';
 
 
 // should get items in this component
 const Main = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.item.items);
+  const isAuthenticated = useSelector(state => state.session.isAuthenticated);
 
   useEffect(() => {
     const getItemList = async () => {
@@ -21,7 +23,7 @@ const Main = () => {
       dispatch(itemActions.setItems(itemList));
     }
     getItemList();
-  }, [items]);
+  }, [items, isAuthenticated]);
 
 
   let itemsColumns = [[],[],[]];
