@@ -71,11 +71,39 @@ export const deleteItem = async (id) => {
 
 // AUTH
 
-export const loginUser = async (username, email, password) => {
+export const login = async (email, password) => {
   try {
-
+    const response = await axios.post(
+      BASE_URI + '/auth/login',
+      { email: email, password: password }
+    );
+    const accessToken = response.data;
+    return accessToken;
   } catch (error) {
-    
+    throw new Error(error.data.response);
+  }
+}
+
+
+export const register = async (username, email, password) => {
+  try {
+    const response = await axios.post(
+      BASE_URI + '/auth/register',
+      { username: username, email: email, password: password }
+    );
+    const data = response.data;
+    return data;
+  } catch (error) {
+    throw new Error(error.data.response);
+  }
+}
+
+
+export const logout = async () => {
+  try {
+    await axios.get(BASE_URI + '/auth/logout');
+  } catch (error) {
+    throw new Error(error.data.response);
   }
 }
 

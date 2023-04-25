@@ -33,8 +33,8 @@ app.use('/api/user', require('./routes/UserRoutes'));
 app.use('/refresh', require('./routes/RefreshTokenRoutes'));
 
 // all routes below this will require jwt verification
-app.use(verifyJwt);
 app.use('/api/item', require('./routes/ItemRoutes'));
+app.use(verifyJwt);
 
 
 // say hi

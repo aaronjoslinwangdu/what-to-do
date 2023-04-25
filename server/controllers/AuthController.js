@@ -75,7 +75,48 @@ const logout = async (req, res) => {
 }
 
 
+// @desc    Registers user
+// @route   POST /auth/register
+const register = async (req, res) => {
+
+  // add validation here
+  if (!req.body.username || !req.body.password || !req.body.email) {
+    return res.sendStatus(400);
+  }
+
+  const password = await bcrypt.hash(req.body.password, 10);
+
+  const user = await User.create({
+    username: req.body.username,
+    email: req.body.email,
+    password: password
+  });
+
+  const accessToken = jwt.sign(
+    { 'email': user.email }, 
+    process.env.ACCESS_TOKEN_SECRET, 
+    { expiresIn: '5m' }
+  );
+
+  const refreshToken = jwt.sign(
+    { 'email': user.email }, 
+    process.env.REFRESH_TOKEN_SECRET, 
+    { expiresIn: '1d' }
+  );
+
+  await RefreshToken.create({ token: refreshToken, userId: user._id });
+
+  res.cookie('jwt', refreshToken, {
+    httpOnly: true,                    // set back to true when using https
+    maxAge: 24 * 60 * 60 * 1000
+  });
+
+  res.json({ accessToken });
+
+}
+
 module.exports = {
   login,
-  logout
+  logout,
+  register
 }

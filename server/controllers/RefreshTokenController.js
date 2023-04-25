@@ -5,14 +5,20 @@ const RefreshToken = require('../models/RefreshTokenModel');
 const handleRefreshToken = async (req, res) => {
   const cookies = req.cookies;
 
-  if (!cookies?.jwt) return res.sendStatus(401);
+  if (!cookies?.jwt) {
+    console.log('Cookie not found');
+    return res.sendStatus(401);
+  }
 
   const refreshToken = cookies.jwt;
 
   const foundToken = await RefreshToken.findOne({ token: refreshToken });
   const foundUser = await User.findOne({ _id: foundToken.userId.toString() });
 
-  if (!foundUser) return res.sendStatus(403);
+  if (!foundUser) {
+    console.log('User not found in refreshtoken collection');
+    return res.sendStatus(403);
+  }
 
   jwt.verify(
     refreshToken,

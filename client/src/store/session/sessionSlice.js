@@ -3,11 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const sessionSlice = createSlice({
   name: 'session',
   initialState: {
-    isAuthenticated: false
+    token: null
   },
   reducers: {
-    login: (state, action) => {
-      console.log('hello :D');
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
+    logout: (state, action) => {
+      state.token = null;
     }
   }
 });

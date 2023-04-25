@@ -29,25 +29,27 @@ const getUsers = async (req, res) => {
 }
 
 
-// @desc    Add User
-// @route   POST /api/User
-const createUser = async (req, res) => {
+// // @desc    Add User
+// // @route   POST /api/User
+// const createUser = async (req, res) => {
 
-  validateEmail(req.body.email);
-  validateUsername(req.body.username);
-  validatePassword(req.body.password);
+//   validateEmail(req.body.email);
+//   validateUsername(req.body.username);
+//   validatePassword(req.body.password);
 
-  const password = await bcrypt.hash(req.body.password, 10);
+//   const password = await bcrypt.hash(req.body.password, 10);
 
-  const user = await User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: password
-  });
+//   const user = await User.create({
+//     username: req.body.username,
+//     email: req.body.email,
+//     password: password
+//   });
 
-  res.status(200).json(user);
 
-}
+
+//   res.status(200).json(user);
+
+// }
 
 
 // @desc    Update a user
@@ -149,7 +151,7 @@ const validatePassword = (password) => {
 module.exports = {
   getUser,
   getUsers,
-  createUser,
+  //createUser,
   updateUser,
   deleteUser
 }
