@@ -27,7 +27,7 @@ const LoginForm = () => {
     dispatch(layoutActions.hideLoginForm());
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     console.log(formState);
     dispatch(layoutActions.hideLoginForm());
