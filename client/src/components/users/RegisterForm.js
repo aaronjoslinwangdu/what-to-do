@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Styles
@@ -7,7 +7,8 @@ import styles from '../../assets/css/users/LoginForm.module.css';
 // Components
 import { layoutActions } from '../../store/layout/layoutSlice';
 import Brand from '../layout/Brand';
-
+import { authActions, registerUser } from '../../store/auth/authSlice';
+import { Link } from 'react-router-dom';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,9 @@ const RegisterForm = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const { token, isLoading, isError, isSuccess, message } =  useSelector(state => state.auth);
+
 
   const changeHandler = (event) => {
     setFormState({
@@ -32,6 +36,8 @@ const RegisterForm = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     console.log(formState);
+
+ 
     dispatch(layoutActions.hideRegisterForm());
   }
 
@@ -87,7 +93,7 @@ const RegisterForm = () => {
         />
       </div>
       <div className={styles.buttonSection}>
-        <div onClick={cancelHandler}>Cancel</div>
+        <Link to='/login'>Log in</Link>
         <button type='submit'>Create</button>
       </div>
     </form>

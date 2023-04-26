@@ -7,6 +7,7 @@ import styles from '../../assets/css/users/LoginForm.module.css';
 // Components
 import { layoutActions } from '../../store/layout/layoutSlice';
 import Brand from '../layout/Brand';
+import { Link } from 'react-router-dom';
 
 
 const LoginForm = () => {
@@ -63,8 +64,8 @@ const LoginForm = () => {
         />
       </div>
       <div className={styles.buttonSection}>
-        <div onClick={cancelHandler}>Cancel</div>
-        <button type='submit'>Login</button>
+        <Link to='/register'>Register</Link>
+        <button type='submit'>Log in</button>
       </div>
     </form>
   );
