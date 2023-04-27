@@ -19,6 +19,12 @@ export const layoutSlice = createSlice({
     sidebarNotHovered: state => {
       state.sidebarHover = false;
     },
+    hideAllForms: state => {
+      state.showAddItemForm = false;
+      state.showDeleteItemForm = false;
+      state.showLoginForm = false;
+      state.showRegisterForm = false;
+    },
     showAddItemForm: state => {
       state.showAddItemForm = true;
     },
