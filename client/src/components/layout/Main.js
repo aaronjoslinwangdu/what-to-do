@@ -16,6 +16,8 @@ const Main = () => {
   const items = useSelector(state => state.item.items);
   const { data: itemsList, isLoading, isSuccess, isError, error } = useGetItemsQuery();
 
+  console.log(items);
+
   useEffect(() => {
     if (itemsList) {
       dispatch(itemActions.setItems(itemsList));

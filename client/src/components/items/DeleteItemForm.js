@@ -7,12 +7,13 @@ import styles from '../../assets/css/items/DeleteItemForm.module.css';
 // Components 
 import { itemActions } from '../../store/items/itemSlice';
 import { layoutActions } from '../../store/layout/layoutSlice';
-import { deleteItem } from '../../utils/Api';
+import { useDeleteItemMutation } from '../../store/items/itemsApiSlice';
 
 
 const DeleteItemForm = (props) => {
   const dispatch = useDispatch();
   const itemToDelete = useSelector(state => state.layout.itemToDelete);
+  const [deleteItem, { isLoading }] = useDeleteItemMutation();
 
   const cancelHandler = () => {
     dispatch(layoutActions.hideDeleteItemForm());
@@ -21,7 +22,7 @@ const DeleteItemForm = (props) => {
 
   const deleteHandler = async (event) => {
     event.preventDefault()
-    const deletedItemId = await deleteItem(itemToDelete._id);
+    const deletedItemId = await deleteItem(itemToDelete._id).unwrap();
     dispatch(itemActions.deleteItem(deletedItemId));
     dispatch(layoutActions.hideDeleteItemForm());
     dispatch(layoutActions.setItemToDelete(null));

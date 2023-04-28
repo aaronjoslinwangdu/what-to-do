@@ -12,7 +12,7 @@ export const itemSlice = createSlice({
       state.items = [...state.items, action.payload];
     },
     deleteItem: (state, action) => {
-      let temp = state.items.filter(item => action.payload._id !== item._id);
+      let temp = state.items.filter(item => action.payload.id !== item._id);
       state.items = temp;
     },
     updateItem: (state, action) => {
