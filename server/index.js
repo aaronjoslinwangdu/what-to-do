@@ -11,7 +11,7 @@ connectDatabase();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true, optionSuccessStatus: 200 }));
 
 // middleware for JSON
 app.use(express.json());
@@ -33,8 +33,8 @@ app.use('/api/user', require('./routes/UserRoutes'));
 app.use('/refresh', require('./routes/RefreshTokenRoutes'));
 
 // all routes below this will require jwt verification
-app.use('/api/item', require('./routes/ItemRoutes'));
 app.use(verifyJwt);
+app.use('/api/item', require('./routes/ItemRoutes'));
 
 
 // say hi

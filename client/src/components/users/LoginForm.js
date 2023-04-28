@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 // Styles
 import styles from '../../assets/css/users/LoginForm.module.css';
 
 // Components
-import { layoutActions } from '../../store/layout/layoutSlice';
 import Brand from '../layout/Brand';
-import { Link } from 'react-router-dom';
+import { authActions } from '../../store/auth/authSlice';
+import { useLoginMutation } from '../../store/auth/authApiSlice';
 
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
   const [formState, setFormState] = useState({
     email: "",
     password: "",
   });
+
 
   const changeHandler = (event) => {
     setFormState({
@@ -24,14 +29,20 @@ const LoginForm = () => {
     });
   }
 
-  const cancelHandler = () => {
-    dispatch(layoutActions.hideLoginForm());
-  }
-
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState);
-    dispatch(layoutActions.hideLoginForm());
+    const { email, password } = formState;
+
+    try {
+      const accessToken = await login({ email, password }).unwrap();
+      dispatch(authActions.setCredentials({ ...accessToken, email }));
+      setFormState({ email: "", password: "" });
+      navigate('/dashboard');
+    } catch (error) {
+      console.log(error.data.message);
+      throw new Error(error);
+    }
+
   }
 
   return (

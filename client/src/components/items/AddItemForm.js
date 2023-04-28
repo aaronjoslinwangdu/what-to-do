@@ -5,15 +5,15 @@ import { useDispatch } from 'react-redux';
 import styles from '../../assets/css/items/AddItemForm.module.css';
 
 // Components 
-import { addItem } from '../../utils/Api';
 import { itemActions } from '../../store/items/itemSlice';
 import { layoutActions } from '../../store/layout/layoutSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-
+import { useAddItemMutation } from '../../store/items/itemsApiSlice';
 
 const AddItemForm = () => {
   const dispatch = useDispatch();
+  const [addItem, { isLoading }] = useAddItemMutation();
 
   const [formState, setFormState] = useState({
     label: "",
@@ -39,9 +39,7 @@ const AddItemForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log('submitted');
-    console.log(formState);
-    const addedItem = await addItem(formState);
+    const addedItem = await addItem(formState).unwrap();
     dispatch(itemActions.addItem(addedItem));
     dispatch(layoutActions.hideAddItemForm());
   }

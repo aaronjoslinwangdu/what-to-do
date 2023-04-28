@@ -6,23 +6,21 @@ import styles from '../../assets/css/layout/Main.module.css';
 
 // Components
 import MainColumn from './MainColumn';
-import { getItems } from '../../utils/Api';
 import { itemActions } from '../../store/items/itemSlice';
+import { useGetItemsQuery } from '../../store/items/itemsApiSlice';
 
 
 // should get items in this component
 const Main = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.item.items);
+  const { data: itemsList, isLoading, isSuccess, isError, error } = useGetItemsQuery();
 
   useEffect(() => {
-    const getItemList = async () => {
-      const itemList = await getItems();
-      dispatch(itemActions.setItems(itemList));
+    if (itemsList) {
+      dispatch(itemActions.setItems(itemsList));
     }
-    getItemList();
-  }, [items]);
-
+  }, [itemsList]);
 
   let itemsColumns = [[],[],[]];
   if (items.length !== 0) {

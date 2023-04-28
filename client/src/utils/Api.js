@@ -91,8 +91,8 @@ export const register = async (username, email, password) => {
       BASE_URI + '/auth/register',
       { username: username, email: email, password: password }
     );
-    const data = response.data;
-    return data;
+    const accessToken = response.data;
+    return accessToken;
   } catch (error) {
     throw new Error(error.data.response);
   }
