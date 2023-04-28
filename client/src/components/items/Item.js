@@ -15,12 +15,14 @@ import {
   faChevronRight 
 } from '@fortawesome/free-solid-svg-icons'
 import { layoutActions } from '../../store/layout/layoutSlice';
-import { updateItem } from '../../utils/Api';
+//import { updateItem } from '../../utils/Api';
+import { useUpdateItemMutation } from '../../store/items/itemsApiSlice';
 import { itemActions } from '../../store/items/itemSlice';
 
 
 const Item = (props) => {
   const dispatch = useDispatch();
+  const [updateItem, { isLoading }] = useUpdateItemMutation();
   const [item, setItem] = useState(props.item);
   const [uneditedItem, setUneditedItem] = useState(item);
   const [isEditingLabel, setIsEditingLabel] = useState(false);
@@ -65,7 +67,7 @@ const Item = (props) => {
   }
   
   const saveItemHandler = async () => {
-    const savedItem = await updateItem(item);
+    const savedItem = await updateItem(item).unwrap();
     setIsEditingLabel(false);
     setIsEditingDesc(false);
     setIsEditingStatus(false);
@@ -75,7 +77,7 @@ const Item = (props) => {
   const moveItemLeftHandler = async () => {
     if (item.status !== 0) {
       let tempItem = {...item, status: item.status - 1};
-      const savedItem = await updateItem(tempItem);
+      const savedItem = await updateItem(tempItem).unwrap();
       dispatch(itemActions.updateItem(savedItem));
     }
   }
@@ -83,7 +85,7 @@ const Item = (props) => {
   const moveItemRightHandler = async () => {
     if (item.status !== 2) {
       let tempItem = {...item, status: item.status + 1};
-      const savedItem = await updateItem(tempItem);
+      const savedItem = await updateItem(tempItem).unwrap();
       dispatch(itemActions.updateItem(savedItem));
     }
   }
