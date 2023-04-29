@@ -34,7 +34,15 @@ export const itemsApiSlice = apiSlice.injectEndpoints({
         headers: headers,
         body: item
       })
-    })
+    }),
+    getUserItems: builder.query({
+      query: (id) => `/api/item/user/${id}`,
+      method: 'GET'
+    }),
+    getItem: builder.query({
+      query: (id) => `/api/item/${id}`,
+      method: 'GET'
+    }),
   })
 });
 
@@ -43,4 +51,6 @@ export const {
   useAddItemMutation,
   useDeleteItemMutation,
   useUpdateItemMutation,
+  useGetUserItemsQuery,
+  useGetItemQuery,
 } = itemsApiSlice;

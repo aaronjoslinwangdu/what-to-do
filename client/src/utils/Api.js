@@ -16,6 +16,17 @@ export const getItems = async () => {
 }
 
 
+export const getUserItems = async (id) => {
+  try {
+    const response = await axios.get(BASE_URI + `/api/item/user/${id}`);
+    const items = response.data;
+    return items;
+  } catch (error) {
+    throw new Error(error.data.response);
+  }
+} 
+
+
 export const getItem = async (id) => {
   try {
     const response = await axios.get(BASE_URI + `/api/item/${id}`);

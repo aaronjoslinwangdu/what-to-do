@@ -29,7 +29,7 @@ const getItems = async (req, res) => {
 
 
 // @desc    Get all items
-// @route   GET /api/item
+// @route   GET /api/item/user/:id
 const getUserItems = async (req, res) => {
 
   const items = await Item.find({ userId: req.body.userId });
