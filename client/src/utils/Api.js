@@ -113,7 +113,7 @@ export const register = async (username, email, password) => {
 
 export const logout = async () => {
   try {
-    await axios.get(BASE_URI + '/auth/logout');
+    const response = await axios.post(BASE_URI + '/auth/logout', { withCredentials: true });
   } catch (error) {
     throw new Error(error.data.response);
   }

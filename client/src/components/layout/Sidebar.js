@@ -11,7 +11,7 @@ import Add from './Add';
 import Select from './Select';
 import Reorder from './Reorder';
 import Change from './Change';
-import Login from './Login';
+import Logout from './Logout';
 
 // Styles
 import styles from '../../assets/css/layout/Sidebar.module.css';
@@ -25,7 +25,7 @@ const Sidebar = () => {
       <Select />
       <Reorder />
       <Change />
-      <Login />
+      <Logout />
     </div>
   );
 };
