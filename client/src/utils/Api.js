@@ -88,8 +88,9 @@ export const login = async (email, password) => {
       BASE_URI + '/auth/login',
       { email: email, password: password }
     );
-    const accessToken = response.data;
-    return accessToken;
+    console.log(response.data);
+    const { accessToken, user } = response.data;
+    return { accessToken, user };
   } catch (error) {
     throw new Error(error.data.response);
   }
@@ -102,8 +103,8 @@ export const register = async (username, email, password) => {
       BASE_URI + '/auth/register',
       { username: username, email: email, password: password }
     );
-    const accessToken = response.data;
-    return accessToken;
+    const { accessToken, user } = response.data;
+    return { accessToken, user };
   } catch (error) {
     throw new Error(error.data.response);
   }

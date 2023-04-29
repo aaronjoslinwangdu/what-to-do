@@ -34,12 +34,12 @@ const LoginForm = () => {
     const { email, password } = formState;
 
     try {
-      const accessToken = await login({ email, password }).unwrap();
-      dispatch(authActions.setCredentials({ ...accessToken, email }));
+      const { accessToken, user } = await login({ email, password }).unwrap();
+      dispatch(authActions.setCredentials({ accessToken, user }));
       setFormState({ email: "", password: "" });
       navigate('/dashboard');
     } catch (error) {
-      //console.log(error.data.message);
+      console.log(error.data.message);
       throw new Error(error);
     }
 

@@ -13,7 +13,10 @@ import { useGetItemsQuery } from '../../store/items/itemsApiSlice';
 const Main = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.item.items);
+  const user = useSelector(state => state.auth.user);
   const { data: itemsList, isLoading, isSuccess, isError, error } = useGetItemsQuery();
+
+  console.log(user);
 
   useEffect(() => {
     if (itemsList) {

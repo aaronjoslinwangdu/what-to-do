@@ -43,7 +43,7 @@ const login = async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000
   });
 
-  res.json({ accessToken });
+  res.json({ accessToken, user: { id: user._id, email: user.email, username: user.username } });
 
 }
 
@@ -111,7 +111,7 @@ const register = async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000
   });
 
-  res.json({ accessToken });
+  res.json({ accessToken, user: { id: user._id, email: user.email, username: user.username } });
 
 }
 
