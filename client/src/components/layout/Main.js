@@ -7,16 +7,16 @@ import styles from '../../assets/css/layout/Main.module.css';
 // Components
 import MainColumn from './MainColumn';
 import { itemActions } from '../../store/items/itemSlice';
-import { useGetItemsQuery } from '../../store/items/itemsApiSlice';
+import { useGetUserItemsQuery } from '../../store/items/itemsApiSlice';
 
 
 const Main = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.item.items);
   const user = useSelector(state => state.auth.user);
-  const { data: itemsList, isLoading, isSuccess, isError, error } = useGetItemsQuery();
+  const { data: itemsList, isLoading, isSuccess, isError, error } = useGetUserItemsQuery(user.id);
 
-  console.log(user)
+  console.log(itemsList);
 
   useEffect(() => {
     if (itemsList) {

@@ -32,7 +32,7 @@ const getItems = async (req, res) => {
 // @route   GET /api/item/user/:id
 const getUserItems = async (req, res) => {
 
-  const items = await Item.find({ userId: req.body.userId });
+  const items = await Item.find({ userId: req.params.id });
 
   if (!items) {
     res.status(400);
