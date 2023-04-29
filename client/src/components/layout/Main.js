@@ -16,7 +16,7 @@ const Main = () => {
   const user = useSelector(state => state.auth.user);
   const { data: itemsList, isLoading, isSuccess, isError, error } = useGetItemsQuery();
 
-  console.log(user);
+  console.log(user)
 
   useEffect(() => {
     if (itemsList) {

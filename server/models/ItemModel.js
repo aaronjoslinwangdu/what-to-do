@@ -12,8 +12,9 @@ const itemSchema = new mongoose.Schema({
     type: Date
   },
   userId: {
-    type: Number,
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
   },
   status: {
     type: Number

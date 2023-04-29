@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Styles
 import styles from '../../assets/css/items/AddItemForm.module.css';
@@ -13,7 +13,10 @@ import { useAddItemMutation } from '../../store/items/itemsApiSlice';
 
 const AddItemForm = () => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user);
   const [addItem, { isLoading }] = useAddItemMutation();
+
+  console.log(user.id);
 
   const [formState, setFormState] = useState({
     label: "",
@@ -21,7 +24,7 @@ const AddItemForm = () => {
     date: "", 
     folder: 1,
     status: 0,
-    userId: 1
+    userId: user.id
   });
 
   const cancelHandler = (event) => {
@@ -39,8 +42,10 @@ const AddItemForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    console.log(formState);
     const addedItem = await addItem(formState).unwrap();
     dispatch(itemActions.addItem(addedItem));
+    console.log(addedItem);
     dispatch(layoutActions.hideAddItemForm());
   }
   
