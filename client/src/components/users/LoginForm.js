@@ -39,7 +39,7 @@ const LoginForm = () => {
       setFormState({ email: "", password: "" });
       navigate('/dashboard');
     } catch (error) {
-      console.log(error.data.message);
+      console.log(error);
       throw new Error(error);
     }
 

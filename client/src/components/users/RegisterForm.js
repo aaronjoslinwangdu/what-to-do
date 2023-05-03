@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // Styles
 import styles from '../../assets/css/users/LoginForm.module.css';
 
 // Components
-import { layoutActions } from '../../store/layout/layoutSlice';
 import Brand from '../layout/Brand';
-import { authActions, registerUser } from '../../store/auth/authSlice';
 import { Link } from 'react-router-dom';
+import { useRegisterMutation } from '../../store/auth/authApiSlice';
+import { authActions } from '../../store/auth/authSlice';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector(state => state.auth.user);
+
+  const [register, { isLoading }] = useRegisterMutation();
   const [formState, setFormState] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
-  const { token, isLoading, isError, isSuccess, message } =  useSelector(state => state.auth);
 
 
   const changeHandler = (event) => {
@@ -29,16 +33,25 @@ const RegisterForm = () => {
     });
   }
 
-  const cancelHandler = () => {
-    dispatch(layoutActions.hideRegisterForm());
-  }
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
- 
-    dispatch(layoutActions.hideRegisterForm());
+    const createUser = {
+      username: formState.username,
+      email: formState.email,
+      password: formState.password,
+    }
+
+    try {
+      const { accessToken, user } = await register(createUser).unwrap();
+      dispatch(authActions.setCredentials({ accessToken, user }));
+      setFormState({ email: "", password: "", username: "", confirmPassword: "" });
+      navigate('/dashboard');
+    } catch (error) {
+      throw new Error(error);
+    }
+
   }
 
   return (
