@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Styles
@@ -14,9 +14,13 @@ import { useAddItemMutation } from '../../store/items/itemsApiSlice';
 const AddItemForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  const items = useSelector(state => state.item.items);
   const [addItem, { isLoading }] = useAddItemMutation();
 
-  console.log(user.id);
+
+  useEffect(() => {
+    setFormState({ ...formState, userId: user.id });
+  }, [user]);
 
   const [formState, setFormState] = useState({
     label: "",
@@ -42,10 +46,8 @@ const AddItemForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState);
     const addedItem = await addItem(formState).unwrap();
     dispatch(itemActions.addItem(addedItem));
-    console.log(addedItem);
     dispatch(layoutActions.hideAddItemForm());
   }
   

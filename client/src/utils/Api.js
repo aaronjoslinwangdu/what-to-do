@@ -88,7 +88,6 @@ export const login = async (email, password) => {
       BASE_URI + '/auth/login',
       { email: email, password: password }
     );
-    console.log(response.data);
     const { accessToken, user } = response.data;
     return { accessToken, user };
   } catch (error) {
@@ -114,6 +113,7 @@ export const register = async (username, email, password) => {
 export const logout = async () => {
   try {
     const response = await axios.post(BASE_URI + '/auth/logout', { withCredentials: true });
+    return response;
   } catch (error) {
     throw new Error(error.data.response);
   }

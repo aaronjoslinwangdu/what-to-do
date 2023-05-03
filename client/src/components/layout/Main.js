@@ -15,20 +15,23 @@ const Main = () => {
   const items = useSelector(state => state.item.items);
   const user = useSelector(state => state.auth.user);
   const { data: itemsList, isLoading, isSuccess, isError, error } = useGetUserItemsQuery(user.id);
-
-  console.log(itemsList);
-
-  useEffect(() => {
-    if (itemsList) {
-      dispatch(itemActions.setItems(itemsList));
-    }
-  }, [itemsList]);
   
   let columns = [];
-  let itemsColumns = [[],[],[]];
-  if (isSuccess) {
-    
-    if (items !== null && items.length !== 0) {
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  } else if (isError) {
+    console.log(error)
+    return <div>Error...</div>
+  } else {
+
+
+    dispatch(itemActions.setItems(itemsList));
+
+    let itemsColumns = [[],[],[]];
+
+
+    if (items && items.length !== 0) {
       for (let i = 0; i < items.length; i++) {
         itemsColumns[items[i].status].push(items[i]);
       }
