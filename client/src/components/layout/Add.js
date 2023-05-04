@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Styles
 import styles from '../../assets/css/layout/Sidebar.module.css';
@@ -10,7 +10,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { layoutActions } from '../../store/layout/layoutSlice';
 
 
-const Add = (props) => {
+const Add = () => {
   const dispatch = useDispatch();
 
   const addItemHandler = () => {
@@ -19,7 +19,7 @@ const Add = (props) => {
 
   return (
     <div className={styles.sidebarItem} onClick={addItemHandler}>
-      <FontAwesomeIcon icon={faPlus} size="2x"/>
+      <FontAwesomeIcon className={styles.sidebarItemIcon} icon={faPlus} size="2x"/>
       <div className={styles.sidebarItemLabel}>Add</div>
     </div>
   );

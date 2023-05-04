@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 // Styles
 import styles from '../../assets/css/layout/Sidebar.module.css';
 import { layoutActions } from '../../store/layout/layoutSlice';
 
-const Change = () => {
+const Profile = () => {
   const dispatch = useDispatch();
 
   const registerHandler = () => {
@@ -18,10 +18,10 @@ const Change = () => {
 
   return (
     <div className={styles.sidebarItem} onClick={registerHandler}>
-      <FontAwesomeIcon icon={faPlus} size="2x"/>
-      <div className={styles.sidebarItemLabel}>Change</div>
+      <FontAwesomeIcon className={styles.sidebarItemIcon} icon={faUser} size="2x"/>
+      <div className={styles.sidebarItemLabel}>Profile</div>
     </div>
   );
 };
 
-export default Change;
+export default Profile;

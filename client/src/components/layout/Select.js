@@ -10,7 +10,7 @@ import styles from '../../assets/css/layout/Sidebar.module.css';
 const Select = () => {
   return (
     <div className={styles.sidebarItem}>
-      <FontAwesomeIcon icon={faCircleCheck} size="2x"/>
+      <FontAwesomeIcon className={styles.sidebarItemIcon} icon={faCircleCheck} size="2x"/>
       <div className={styles.sidebarItemLabel}>Select</div>
     </div>
   );

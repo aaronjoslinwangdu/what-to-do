@@ -27,7 +27,7 @@ const Logout = () => {
 
   return (
     <div className={styles.sidebarItem} onClick={logoutHandler}>
-      <FontAwesomeIcon icon={faRightToBracket} size='2x'/>
+      <FontAwesomeIcon className={styles.sidebarItemIcon} icon={faRightToBracket} size='2x'/>
       <div className={styles.sidebarItemLabel}>Log out</div>
     </div>
   );
