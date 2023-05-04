@@ -12,12 +12,12 @@ import { layoutActions } from '../../store/layout/layoutSlice';
 const Profile = () => {
   const dispatch = useDispatch();
 
-  const registerHandler = () => {
-    dispatch(layoutActions.showRegisterForm());
+  const profileHandler = () => {
+    dispatch(layoutActions.setShowProfileForm(true));
   }
 
   return (
-    <div className={styles.sidebarItem} onClick={registerHandler}>
+    <div className={styles.sidebarItem} onClick={profileHandler}>
       <FontAwesomeIcon className={styles.sidebarItemIcon} icon={faUser} size="2x"/>
       <div className={styles.sidebarItemLabel}>Profile</div>
     </div>
