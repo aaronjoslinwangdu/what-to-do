@@ -6,6 +6,7 @@ const initialState = {
   showDeleteItemForm: false,
   showLoginForm: false,
   showRegisterForm: false,
+  showProfileForm: false,
   itemToDelete: null,
 }
 
@@ -19,32 +20,16 @@ export const layoutSlice = createSlice({
     hideAllForms: state => {
       state.showAddItemForm = false;
       state.showDeleteItemForm = false;
-      state.showLoginForm = false;
-      state.showRegisterForm = false;
+      state.showProfileForm = false;
     },
-    showAddItemForm: state => {
-      state.showAddItemForm = true;
+    setShowAddItemForm: (state, action) => {
+      state.showAddItemForm = action.payload;
     },
-    hideAddItemForm: state => {
-      state.showAddItemForm = false;
+    setShowDeleteItemForm: (state, action) => {
+      state.showDeleteItemForm = action.payload;
     },
-    showDeleteItemForm: state => {
-      state.showDeleteItemForm = true;
-    },
-    hideDeleteItemForm: state => {
-      state.showDeleteItemForm = false;
-    },
-    showLoginForm: state => {
-      state.showLoginForm = true;
-    },
-    hideLoginForm: state => {
-      state.showLoginForm = false;
-    },
-    showRegisterForm: state => {
-      state.showRegisterForm = true;
-    },
-    hideRegisterForm: state => {
-      state.showRegisterForm = false;
+    setShowProfileForm: (state, action) => {
+      state.showProfileForm = action.payload;
     },
     setItemToDelete: (state, action) => {
       state.itemToDelete = action.payload;

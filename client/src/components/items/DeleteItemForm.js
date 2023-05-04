@@ -16,7 +16,7 @@ const DeleteItemForm = (props) => {
   const [deleteItem, { isLoading }] = useDeleteItemMutation();
 
   const cancelHandler = () => {
-    dispatch(layoutActions.hideDeleteItemForm());
+    dispatch(layoutActions.setShowDeleteItemForm(false));
     dispatch(layoutActions.setItemToDelete(null));
   }
 
@@ -24,7 +24,7 @@ const DeleteItemForm = (props) => {
     event.preventDefault()
     const deletedItemId = await deleteItem(itemToDelete._id).unwrap();
     dispatch(itemActions.deleteItem(deletedItemId));
-    dispatch(layoutActions.hideDeleteItemForm());
+    dispatch(layoutActions.setShowDeleteItemForm(false));
     dispatch(layoutActions.setItemToDelete(null));
   }
 

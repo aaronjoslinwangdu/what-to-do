@@ -14,7 +14,7 @@ const Add = () => {
   const dispatch = useDispatch();
 
   const addItemHandler = () => {
-    dispatch(layoutActions.showAddItemForm());
+    dispatch(layoutActions.setShowAddItemForm(true));
   }
 
   return (

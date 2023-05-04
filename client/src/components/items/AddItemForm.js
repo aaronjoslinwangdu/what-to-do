@@ -33,7 +33,7 @@ const AddItemForm = () => {
 
   const cancelHandler = (event) => {
     event.preventDefault();
-    dispatch(layoutActions.hideAddItemForm());
+    dispatch(layoutActions.setShowAddItemForm(false));
   }
 
   const changeHandler = (event) => {
@@ -48,7 +48,7 @@ const AddItemForm = () => {
     event.preventDefault();
     const addedItem = await addItem(formState).unwrap();
     dispatch(itemActions.addItem(addedItem));
-    dispatch(layoutActions.hideAddItemForm());
+    dispatch(layoutActions.setShowAddItemForm(false));
   }
   
 
