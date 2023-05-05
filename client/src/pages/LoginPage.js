@@ -4,7 +4,7 @@ import React from 'react';
 import styles from '../assets/css/pages/AuthPage.module.css';
 
 // Components
-import LoginForm from '../components/users/LoginForm';
+import LoginForm from '../components/forms/LoginForm';
 
 
 const LoginPage = () => {

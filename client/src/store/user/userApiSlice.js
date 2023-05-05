@@ -11,12 +11,16 @@ export const userApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/api/user/${id}`,
       method: 'GET',
       headers: headers,
+      providesTags: ['getUser'],
     }),
     updateUser: builder.mutation({
-      query: (user) => `/api/user/${user.id}`,
-      method: 'PUT',
-      body: user,
-      headers: headers,
+      query: (user) => ({
+        url: `/api/user/${user.id}`,
+        method: 'PUT',
+        body: { ...user },
+        headers: headers,
+      }),
+      invalidatesTags: ['getUser'],
     })
   })
 });

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
+  itemToDelete: null,
 }
 
 export const itemSlice = createSlice({
@@ -22,6 +23,9 @@ export const itemSlice = createSlice({
     },
     setItems: (state, action) => {
       state.items = action.payload;
+    },
+    setItemToDelete: (state, action) => {
+      state.itemToDelete = action.payload;
     }
   }
 });

@@ -1,4 +1,5 @@
 const User = require('../models/UserModel');
+const Item = require('../models/ItemModel');
 const bcrypt = require('bcrypt');
 
 
@@ -84,6 +85,8 @@ const deleteUser = async (req, res) => {
     res.status(400);
     throw new Error('User not found');
   }
+
+  await Item.deleteMany({ userId: req.params.id });
 
   console.log(user);
   await User.deleteOne();

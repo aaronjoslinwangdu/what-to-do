@@ -7,7 +7,6 @@ const initialState = {
   showLoginForm: false,
   showRegisterForm: false,
   showProfileForm: false,
-  itemToDelete: null,
 }
 
 export const layoutSlice = createSlice({
@@ -30,9 +29,6 @@ export const layoutSlice = createSlice({
     },
     setShowProfileForm: (state, action) => {
       state.showProfileForm = action.payload;
-    },
-    setItemToDelete: (state, action) => {
-      state.itemToDelete = action.payload;
     }
   }
 });

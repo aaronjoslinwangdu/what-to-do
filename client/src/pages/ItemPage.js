@@ -9,11 +9,11 @@ import Navigation from '../components/layout/Navigation';
 import Main from '../components/layout/Main';
 import Sidebar from '../components/layout/Sidebar';
 import Modal from '../components/layout/Modal';
-import AddItemForm from '../components/items/AddItemForm';
-import DeleteItemForm from '../components/items/DeleteItemForm';
-import LoginForm from '../components/users/LoginForm';
-import RegisterForm from '../components/users/RegisterForm';
-import ProfileForm from '../components/users/ProfileForm';
+import AddItemForm from '../components/forms/AddItemForm';
+import DeleteItemForm from '../components/forms/DeleteForm';
+import LoginForm from '../components/forms/LoginForm';
+import RegisterForm from '../components/forms/RegisterForm';
+import ProfileForm from '../components/forms/ProfileForm';
 
 
 const ItemPage = () => {

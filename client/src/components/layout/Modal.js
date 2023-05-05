@@ -7,6 +7,8 @@ import styles from '../../assets/css/layout/Modal.module.css';
 
 // Components 
 import { layoutActions } from '../../store/layout/layoutSlice';
+import { itemActions } from '../../store/items/itemSlice';
+import { userActions } from '../../store/user/userSlice';
 
 
 
@@ -15,6 +17,8 @@ const Modal = (props) => {
 
   const hideModalHandler = () => {
     dispatch(layoutActions.hideAllForms());
+    dispatch(itemActions.setItemToDelete(null));
+    dispatch(userActions.setUserToDelete(null));
   }
 
   const Backdrop = (props) => {

@@ -4,7 +4,7 @@ import React from 'react';
 import styles from '../assets/css/pages/AuthPage.module.css';
 
 // Components
-import RegisterForm from '../components/users/RegisterForm';
+import RegisterForm from '../components/forms/RegisterForm';
 
 
 

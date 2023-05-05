@@ -31,7 +31,7 @@ const Item = (props) => {
 
   const deleteItemHandler = () => {
     dispatch(layoutActions.setShowDeleteItemForm(true));
-    dispatch(layoutActions.setItemToDelete(item));
+    dispatch(itemActions.setItemToDelete(item));
   }
 
   const editItemHandler = () => {
