@@ -43,7 +43,15 @@ const login = async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000
   });
 
-  res.json({ accessToken, user: { id: user._id, email: user.email, username: user.username } });
+  res.json({ 
+    accessToken, 
+    user: { 
+      id: user._id,
+      email: user.email, 
+      username: user.username,
+      location: req.body.location,
+    } 
+  });
 
 }
 
@@ -84,12 +92,15 @@ const register = async (req, res) => {
     return res.sendStatus(400);
   }
 
+  
+
   const password = await bcrypt.hash(req.body.password, 10);
 
   const user = await User.create({
     username: req.body.username,
     email: req.body.email,
-    password: password
+    password: password,
+    location: req.body.location,
   });
 
   const accessToken = jwt.sign(
@@ -111,7 +122,15 @@ const register = async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000
   });
 
-  res.json({ accessToken, user: { id: user._id, email: user.email, username: user.username } });
+  res.json({ 
+    accessToken, 
+    user: { 
+      id: user._id, 
+      email: user.email, 
+      username: user.username, 
+      location: user.location
+    } 
+  });
 
 }
 

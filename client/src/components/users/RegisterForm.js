@@ -23,6 +23,7 @@ const RegisterForm = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    location: "",
   });
 
 
@@ -41,12 +42,13 @@ const RegisterForm = () => {
       username: formState.username,
       email: formState.email,
       password: formState.password,
+      location: formState.location
     }
 
     try {
       const { accessToken, user } = await register(createUser).unwrap();
       dispatch(authActions.setCredentials({ accessToken, user }));
-      setFormState({ email: "", password: "", username: "", confirmPassword: "" });
+      setFormState({ email: "", password: "", username: "", confirmPassword: "", firstName: "", lastName: "", location: "" });
       navigate('/dashboard');
     } catch (error) {
       throw new Error(error);
@@ -81,6 +83,17 @@ const RegisterForm = () => {
           name='email'
           id='email'
           placeholder='Enter an email address'
+        />
+      </div>
+      <div className={styles.inputSection}>
+        <label htmlFor='location'>Location</label>
+        <input
+          onChange={changeHandler}
+          value={formState.location}
+          type='text'
+          name='location'
+          id='location'
+          placeholder='Enter your Location'
         />
       </div>
       <div className={styles.inputSection}>
