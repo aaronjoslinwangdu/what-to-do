@@ -61,11 +61,6 @@ const AddItemForm = () => {
       return;
     }
 
-
-    console.log(formState.date);
-
-
-
     const addedItem = await addItem(formState).unwrap();
     dispatch(itemActions.addItem(addedItem));
     dispatch(layoutActions.setShowAddItemForm(false));

@@ -43,6 +43,11 @@
   resize: none;
 }
 
+.inputSection input.error {
+  border-color: #c23535;
+  background-color: #f5d1d1;
+}
+
 .inputSection label {
   font-size: 14px;
   font-weight: 700;
@@ -80,4 +85,18 @@
 .buttonSection div:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.labelRow {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.errorMessage {
+  color: #c23535;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }

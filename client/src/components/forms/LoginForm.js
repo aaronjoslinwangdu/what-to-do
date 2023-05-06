@@ -21,12 +21,21 @@ const LoginForm = () => {
     password: "",
   });
 
+  const [formErrors, setFormErrors] = useState({
+    empty: null,
+    email: null,
+    password: null,
+  });
 
   const changeHandler = (event) => {
     setFormState({
       ...formState,
       [event.target.name]: event.target.value
     });
+    setFormErrors({
+      ...formErrors,
+      [event.target.name]: null
+    })
   }
 
   const submitHandler = async (event) => {
@@ -39,22 +48,43 @@ const LoginForm = () => {
       setFormState({ email: "", password: "" });
       navigate('/dashboard');
     } catch (error) {
-      console.log(error);
-      throw new Error(error);
+
+      if (error.status === 400) {
+        console.log(error.data.message)
+        setFormErrors({ ...formErrors, empty: error.data.message, email: null, password: null });
+        return;
+      } else if (error.status === 401) {
+        if (error.data.message === 'Email not found') {
+          setFormErrors({ ...formErrors, email: error.data.message, empty: null, password: null });
+          setFormState({ ...formState, email: '', password: ''});
+        } 
+        if (error.data.message === 'Invalid password') {
+          setFormErrors({ ...formErrors, password: error.data.message, empty: null, email: null });
+          setFormState({ ...formState, password: ''});
+        }
+        return;
+      }
     }
 
   }
 
   return (
     <form className={styles.loginForm} onSubmit={submitHandler}>
+
       <div className={styles.headerSection}>
         <div>Log in</div>
         <div className={styles.divider}>|</div>
         <Brand />
       </div>
+
       <div className={styles.inputSection}>
-        <label htmlFor='email'>Email</label>
+        {formErrors.empty && <div className={styles.errorMessage}>{formErrors.empty}</div>}
+        <label className={styles.labelRow} htmlFor='email'>
+          Email
+          {formErrors.email && <div className={styles.errorMessage}>{formErrors.email}</div>}
+        </label>
         <input
+          className={formErrors.email ? `${styles.error}` : ''}
           onChange={changeHandler}
           value={formState.email}
           type='email'
@@ -63,9 +93,14 @@ const LoginForm = () => {
           placeholder='Email address...'
         />
       </div>
+
       <div className={styles.inputSection}>
-        <label htmlFor='password'>Password</label>
+        <label className={styles.labelRow} htmlFor='password'>
+          Password
+          {formErrors.password && <div className={styles.errorMessage}>{formErrors.password}</div>}
+        </label>
         <input
+          className={formErrors.password ? `${styles.error}` : ''}
           onChange={changeHandler}
           value={formState.password}
           type='password'
@@ -74,10 +109,12 @@ const LoginForm = () => {
           placeholder='Password...'
         />
       </div>
+
       <div className={styles.buttonSection}>
         <Link to='/register'>Register</Link>
         <button type='submit'>Log in</button>
       </div>
+
     </form>
   );
 }
