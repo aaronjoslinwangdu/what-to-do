@@ -23,7 +23,7 @@ const DeleteItemForm = (props) => {
   const [deleteUser, { isDeleteUserLoading}] = useDeleteUserMutation();
 
   const cancelHandler = () => {
-    dispatch(layoutActions.setShowDeleteItemForm(false));
+    dispatch(layoutActions.setShowDeleteForm(false));
     dispatch(itemActions.setItemToDelete(null));
   }
 
@@ -47,14 +47,17 @@ const DeleteItemForm = (props) => {
 
   let label;
   if (itemToDelete !== null) {
-    label = <div className={styles.warningLabel}>{itemToDelete.label}?</div>
+    label = <div className={styles.warningLabel}> {itemToDelete.label}?</div>
   } else if (userToDelete !== null) {
-    label = <div className={styles.warningLabel}>{userToDelete.username}?</div>
+    label = <div className={styles.warningLabel}> {userToDelete.username}?</div>
   }
 
   return (
     <div className={styles.deleteItemForm}>
-      <div className={styles.warning}>Are you sure you want to delete </div>
+      <div className={styles.warning}>Are you sure you want to delete 
+        {userToDelete && ' User:'}
+        {itemToDelete && ' Item:'}
+        </div>
       {label}
       <div className={styles.options}>
         <div className={styles.cancel} onClick={cancelHandler}>Cancel</div>
