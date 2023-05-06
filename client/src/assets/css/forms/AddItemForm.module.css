@@ -19,8 +19,16 @@
   color: #494949;
 }
 
-.form label span {
+.form label .asterisk {
   color: #ff0000;
+  margin-left: 3px;
+}
+
+.errorMessage {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c23535;
+  margin-left: 10px;
 }
 
 .form input[type=text], 
@@ -37,10 +45,24 @@
   resize: none;
 }
 
+.form input.error {
+  border: 2px solid #c23535;
+  background-color: #f5d1d1;
+}
+
+.form input.error:focus {
+  background-color: #ffffff;  
+}
+
 .form input[type=text]:focus,
 .form textarea:focus {
   background-color: #ffffff;
   border: 2px solid #bdc8ff;
+}
+
+.labelRow {
+  display: flex;
+  flex-direction: row;
 }
 
 .selectGroup {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 // Styles
-import styles from '../../assets/css/users/LoginForm.module.css';
+import styles from '../../assets/css/forms/LoginForm.module.css';
 
 // Components
 import Brand from '../layout/Brand';

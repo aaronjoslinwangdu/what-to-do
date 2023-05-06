@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Styles
-import styles from '../../assets/css/users/ProfileForm.module.css';
+import styles from '../../assets/css/forms/ProfileForm.module.css';
 
 // Components
 import { useGetUserQuery } from '../../store/user/userApiSlice';

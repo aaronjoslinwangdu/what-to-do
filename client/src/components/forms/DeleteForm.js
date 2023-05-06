@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Styles
-import styles from '../../assets/css/items/DeleteItemForm.module.css';
+import styles from '../../assets/css/forms/DeleteItemForm.module.css';
 
 // Components 
 import { itemActions } from '../../store/items/itemSlice';
