@@ -30,7 +30,7 @@ const Item = (props) => {
   const [isEditingStatus, setIsEditingStatus] = useState(false);
 
   const deleteItemHandler = () => {
-    dispatch(layoutActions.setShowDeleteItemForm(true));
+    dispatch(layoutActions.setShowDeleteForm(true));
     dispatch(itemActions.setItemToDelete(item));
   }
 

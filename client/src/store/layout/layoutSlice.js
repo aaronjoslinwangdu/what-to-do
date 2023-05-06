@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   sidebarHovered: false,
   showAddItemForm: false,
-  showDeleteItemForm: false,
+  showDeleteForm: false,
   showLoginForm: false,
   showRegisterForm: false,
   showProfileForm: false,
@@ -18,14 +18,14 @@ export const layoutSlice = createSlice({
     },
     hideAllForms: state => {
       state.showAddItemForm = false;
-      state.showDeleteItemForm = false;
+      state.showDeleteForm = false;
       state.showProfileForm = false;
     },
     setShowAddItemForm: (state, action) => {
       state.showAddItemForm = action.payload;
     },
-    setShowDeleteItemForm: (state, action) => {
-      state.showDeleteItemForm = action.payload;
+    setShowDeleteForm: (state, action) => {
+      state.showDeleteForm = action.payload;
     },
     setShowProfileForm: (state, action) => {
       state.showProfileForm = action.payload;

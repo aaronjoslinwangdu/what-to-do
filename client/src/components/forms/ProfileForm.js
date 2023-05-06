@@ -18,11 +18,11 @@ const ProfileForm = () => {
 
   const deleteHandler = () => {
     dispatch(userActions.setUserToDelete(user));
+    console.log()
     dispatch(layoutActions.setShowProfileForm(false));
-    dispatch(layoutActions.setShowDeleteItemForm(true));
+    dispatch(layoutActions.setShowDeleteForm(true));
   }
 
-  console.log(user);
 
   const profile = (
     <div>

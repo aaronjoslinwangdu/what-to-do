@@ -2,7 +2,8 @@ import { apiSlice } from "../api/apiSlice";
 
 const headers = {
   'Access-Control-Allow-Origin': 'http://localhost:3000',
-  'Access-Control-Allow-Credentials': 'true'
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Allow-Methods': ['GET', 'POST', 'PUT', 'DELETE']
 }
 
 export const userApiSlice = apiSlice.injectEndpoints({
@@ -21,11 +22,19 @@ export const userApiSlice = apiSlice.injectEndpoints({
         headers: headers,
       }),
       invalidatesTags: ['getUser'],
-    })
+    }),
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `/api/user/${id}`,
+        method: 'DELETE',
+        headers: headers,
+      }),
+    }),
   })
 });
 
 export const { 
   useGetUserQuery,
   useUpdateUserMutation,
+  useDeleteUserMutation,
 } = userApiSlice;

@@ -8,13 +8,19 @@ import styles from '../../assets/css/items/DeleteItemForm.module.css';
 import { itemActions } from '../../store/items/itemSlice';
 import { layoutActions } from '../../store/layout/layoutSlice';
 import { useDeleteItemMutation } from '../../store/items/itemsApiSlice';
+import { useDeleteUserMutation } from '../../store/user/userApiSlice';
+import { authActions } from '../../store/auth/authSlice';
+import { userActions } from '../../store/user/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 const DeleteItemForm = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const itemToDelete = useSelector(state => state.item.itemToDelete);
   const userToDelete = useSelector(state => state.user.userToDelete);
-  const [deleteItem, { isLoading }] = useDeleteItemMutation();
+  const [deleteItem, { isDeleteItemLoading }] = useDeleteItemMutation();
+  const [deleteUser, { isDeleteUserLoading}] = useDeleteUserMutation();
 
   const cancelHandler = () => {
     dispatch(layoutActions.setShowDeleteItemForm(false));
@@ -27,12 +33,15 @@ const DeleteItemForm = (props) => {
     if (itemToDelete !== null) {
       const deletedItemId = await deleteItem(itemToDelete._id).unwrap();
       dispatch(itemActions.deleteItem(deletedItemId));
-      dispatch(layoutActions.setShowDeleteItemForm(false));
+      dispatch(layoutActions.setShowDeleteForm(false));
       dispatch(itemActions.setItemToDelete(null));
     } else if (userToDelete !== null) {
-      console.log('delete User');
+      dispatch(authActions.logout());
+      dispatch(layoutActions.setShowDeleteForm(false));
+      dispatch(userActions.setUserToDelete(null));
+      navigate('/register');
+      const deletedUserId = await deleteUser(userToDelete.id).unwrap();
     }
-
 
   }
 

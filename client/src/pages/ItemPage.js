@@ -10,7 +10,7 @@ import Main from '../components/layout/Main';
 import Sidebar from '../components/layout/Sidebar';
 import Modal from '../components/layout/Modal';
 import AddItemForm from '../components/forms/AddItemForm';
-import DeleteItemForm from '../components/forms/DeleteForm';
+import DeleteForm from '../components/forms/DeleteForm';
 import LoginForm from '../components/forms/LoginForm';
 import RegisterForm from '../components/forms/RegisterForm';
 import ProfileForm from '../components/forms/ProfileForm';
@@ -18,7 +18,7 @@ import ProfileForm from '../components/forms/ProfileForm';
 
 const ItemPage = () => {
   const showAddItemForm = useSelector(state => state.layout.showAddItemForm);
-  const showDeleteItemForm = useSelector(state => state.layout.showDeleteItemForm);
+  const showDeleteForm = useSelector(state => state.layout.showDeleteForm);
   const showProfileForm = useSelector(state => state.layout.showProfileForm);
   const showLoginForm = useSelector(state => state.layout.showLoginForm);
   const showRegisterForm = useSelector(state => state.layout.showRegisterForm);
@@ -26,8 +26,8 @@ const ItemPage = () => {
   let modal;
   if (showAddItemForm) {
     modal = <Modal><AddItemForm /></Modal>
-  } else if (showDeleteItemForm) {
-    modal = <Modal><DeleteItemForm /></Modal>
+  } else if (showDeleteForm) {
+    modal = <Modal><DeleteForm /></Modal>
   } else if (showProfileForm) {
     modal = <Modal><ProfileForm /></Modal>
   }

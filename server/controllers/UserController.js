@@ -1,5 +1,6 @@
 const User = require('../models/UserModel');
 const Item = require('../models/ItemModel');
+const RefreshToken = require('../models/RefreshTokenModel');
 const bcrypt = require('bcrypt');
 
 
@@ -28,29 +29,6 @@ const getUsers = async (req, res) => {
   res.status(200).json(users);
 
 }
-
-
-// // @desc    Add User
-// // @route   POST /api/User
-// const createUser = async (req, res) => {
-
-//   validateEmail(req.body.email);
-//   validateUsername(req.body.username);
-//   validatePassword(req.body.password);
-
-//   const password = await bcrypt.hash(req.body.password, 10);
-
-//   const user = await User.create({
-//     username: req.body.username,
-//     email: req.body.email,
-//     password: password
-//   });
-
-
-
-//   res.status(200).json(user);
-
-// }
 
 
 // @desc    Update a user
@@ -87,9 +65,9 @@ const deleteUser = async (req, res) => {
   }
 
   await Item.deleteMany({ userId: req.params.id });
+  await RefreshToken.deleteMany({ userId: req.params.id });
 
-  console.log(user);
-  await User.deleteOne();
+  await User.deleteOne({ _id: req.params.id });
 
   res.status(200).json({ id: req.params.id });
  
@@ -154,7 +132,6 @@ const validatePassword = (password) => {
 module.exports = {
   getUser,
   getUsers,
-  //createUser,
   updateUser,
   deleteUser
 }
