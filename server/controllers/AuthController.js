@@ -16,7 +16,7 @@ const login = async (req, res) => {
 
   const user = await User.findOne({ email: email }).exec();
   if (!user) {
-    return res.status(401).json({ message: 'User not found'});
+    return res.status(401).json({ message: 'Email not found'});
   }
 
   const validPassword = await bcrypt.compare(password, user.password);
@@ -87,12 +87,32 @@ const logout = async (req, res) => {
 // @route   POST /auth/register
 const register = async (req, res) => {
 
-  // add validation here
-  if (!req.body.username || !req.body.password || !req.body.email) {
-    return res.sendStatus(400);
+  if (!req.body.username) {
+    return res.status(400).json({ message: 'Please enter a username', type: 'username'});
   }
 
-  
+  if (!req.body.email) {
+    return res.status(400).json({ message: 'Please enter an email address', type: 'email' });
+  }
+
+  if (!req.body.password) {
+    return res.status(400).json({ message: 'Please enter a password', type: 'password' });
+  }
+
+  const alphanum = /^[a-zA-Z0-9]+$/;
+  if (!alphanum.test(req.body.username)) {
+    return res.status(400).json({ message: 'No special characters allowed', type: 'username' });
+  }
+
+  const foundUser = await User.findOne({ username: req.body.username }).exec();
+  if (foundUser) {
+    return res.status(400).json({ message: 'This username is already taken', type: 'username' });
+  }
+
+  const foundEmail = await User.findOne({ email: req.body.email }).exec();
+  if (foundEmail) {
+    return res.status(400).json({ message: 'This email is already taken', type: 'email' });
+  }
 
   const password = await bcrypt.hash(req.body.password, 10);
 
@@ -114,6 +134,7 @@ const register = async (req, res) => {
     process.env.REFRESH_TOKEN_SECRET, 
     { expiresIn: '1d' }
   );
+
 
   await RefreshToken.create({ token: refreshToken, userId: user._id });
 
