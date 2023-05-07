@@ -50,7 +50,6 @@ const LoginForm = () => {
     } catch (error) {
 
       if (error.status === 400) {
-        console.log(error.data.message)
         setFormErrors({ ...formErrors, empty: error.data.message, email: null, password: null });
         return;
       } else if (error.status === 401) {
@@ -84,7 +83,7 @@ const LoginForm = () => {
           {formErrors.email && <div className={styles.errorMessage}>{formErrors.email}</div>}
         </label>
         <input
-          className={formErrors.email ? `${styles.error}` : ''}
+          className={formErrors.email ? `${styles.errorInput}` : ''}
           onChange={changeHandler}
           value={formState.email}
           type='email'
@@ -100,7 +99,7 @@ const LoginForm = () => {
           {formErrors.password && <div className={styles.errorMessage}>{formErrors.password}</div>}
         </label>
         <input
-          className={formErrors.password ? `${styles.error}` : ''}
+          className={formErrors.password ? `${styles.errorInput}` : ''}
           onChange={changeHandler}
           value={formState.password}
           type='password'

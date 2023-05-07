@@ -43,7 +43,7 @@
   resize: none;
 }
 
-.inputSection input.error {
+.inputSection input.errorInput {
   border-color: #c23535;
   background-color: #f5d1d1;
 }
