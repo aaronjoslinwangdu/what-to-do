@@ -11,12 +11,14 @@ import { userActions } from '../../store/user/userSlice';
 import { authActions } from '../../store/auth/authSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import Spinner from '../layout/Spinner';
 
 
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [updateUser, { isUpdateUserLoading, isSuccess }] = useUpdateUserMutation();
 
@@ -65,6 +67,7 @@ const ProfileForm = () => {
     }
 
     try {
+      setIsLoading(true);
       const updatedUser = await updateUser(userWithUpdates).unwrap();
       dispatch(authActions.setUser(updatedUser));
       setFormErrors({ username: null, email: null, location: null});
@@ -83,7 +86,8 @@ const ProfileForm = () => {
         return;
       }
 
-
+    } finally {
+      setIsLoading(false);
     }
 
   }
@@ -213,9 +217,12 @@ const ProfileForm = () => {
 
 
   return (
+
+
     <div>
-      {!isEditing && profile}
-      {isEditing && editProfile}
+      {isLoading && <Spinner />}
+      {!isLoading && !isEditing&& profile}
+      {!isLoading && isEditing && editProfile}
     </div>
     
   );

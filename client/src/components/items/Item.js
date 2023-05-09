@@ -18,6 +18,7 @@ import { layoutActions } from '../../store/layout/layoutSlice';
 //import { updateItem } from '../../utils/Api';
 import { useUpdateItemMutation } from '../../store/items/itemsApiSlice';
 import { itemActions } from '../../store/items/itemSlice';
+import Spinner from '../layout/Spinner';
 
 
 const Item = (props) => {
@@ -97,95 +98,100 @@ const Item = (props) => {
   const rightNavSection = item.status !== 2 ? `${styles.navSectionEnabled}` : `${styles.navSectionDisabled}`;
 
   return (
-    <div className={styles.item}>
-      <div className={leftNavSection} onClick={moveItemLeftHandler}>
-        <FontAwesomeIcon className={leftStyles} icon={faChevronLeft} />
-      </div>
-      <div className={styles.itemContent}>
-        <div className={styles.itemHeader}>
-          {!isEditingLabel && 
-            <div 
-              className={styles.itemLabel} 
-              onClick={editLabelHandler}
-            >
-              {item.label}
-            </div>
-          }
-          {isEditingLabel && 
-            <input 
-              className={styles.editLabel} 
-              type="text" 
-              name="label"
-              value={item.label} 
-              onChange={changeHandler}
-            >
-            </input>
-          }
-          {isEditingStatus &&
-            <select 
-              name='status' 
-              id='status'
-              value={item.status}
-              onChange={changeHandler}
-              className={styles.editStatus}
-            >
-              <option value={0}>To Do</option>
-              <option value={1}>In Progress</option>
-              <option value={2}>Done</option>
-            </select>
-          }
-          {!isEditingDesc && !isEditingLabel &&
-            <FontAwesomeIcon 
-              className={styles.itemEdit}
-              onClick={editItemHandler}
-              icon={faPenToSquare} 
-            />
-          }
-          {(isEditingDesc || isEditingLabel) &&
-            <Fragment>
-              <FontAwesomeIcon
-                className={styles.itemCancel}
-                onClick={cancelHandler}
-                icon={faXmark}
-              />
+    <>
+      {isLoading && <Spinner />}
+      {!isLoading &&
+        <div className={styles.item}>
+          <div className={leftNavSection} onClick={moveItemLeftHandler}>
+            <FontAwesomeIcon className={leftStyles} icon={faChevronLeft} />
+          </div>
+          <div className={styles.itemContent}>
+            <div className={styles.itemHeader}>
+              {!isEditingLabel && 
+                <div 
+                  className={styles.itemLabel} 
+                  onClick={editLabelHandler}
+                >
+                  {item.label}
+                </div>
+              }
+              {isEditingLabel && 
+                <input 
+                  className={styles.editLabel} 
+                  type="text" 
+                  name="label"
+                  value={item.label} 
+                  onChange={changeHandler}
+                >
+                </input>
+              }
+              {isEditingStatus &&
+                <select 
+                  name='status' 
+                  id='status'
+                  value={item.status}
+                  onChange={changeHandler}
+                  className={styles.editStatus}
+                  >
+                  <option value={0}>To Do</option>
+                  <option value={1}>In Progress</option>
+                  <option value={2}>Done</option>
+                </select>
+              }
+              {!isEditingDesc && !isEditingLabel &&
+                <FontAwesomeIcon 
+                  className={styles.itemEdit}
+                  onClick={editItemHandler}
+                  icon={faPenToSquare} 
+                />
+              }
+              {(isEditingDesc || isEditingLabel) &&
+                <Fragment>
+                  <FontAwesomeIcon
+                    className={styles.itemCancel}
+                    onClick={cancelHandler}
+                    icon={faXmark}
+                  />
+                  <FontAwesomeIcon 
+                    className={styles.itemSave}
+                    onClick={saveItemHandler}
+                    icon={faSquareCheck} 
+                  />
+                </Fragment>
+              }
               <FontAwesomeIcon 
-                className={styles.itemSave}
-                onClick={saveItemHandler}
-                icon={faSquareCheck} 
+                className={styles.itemDelete} 
+                onClick={deleteItemHandler}
+                icon={faTrashCan} 
               />
-            </Fragment>
-          }
-          <FontAwesomeIcon 
-            className={styles.itemDelete} 
-            onClick={deleteItemHandler}
-            icon={faTrashCan} 
-          />
-        </div>
-        <div>
-          {!isEditingDesc &&
-            <div 
-              className={styles.itemDesc}
-              onClick={editDescriptionHandler}
-            >
-              {item.description}
             </div>
-          }
-          {isEditingDesc &&
-            <input 
-              className={styles.editDescription} 
-              type="text" 
-              value={item.description} 
-              name="description"
-              onChange={changeHandler}
-            >
-            </input>
-          }
+            <div>
+              {!isEditingDesc &&
+                <div 
+                  className={styles.itemDesc}
+                  onClick={editDescriptionHandler}
+                >
+                  {item.description}
+                </div>
+              }
+              {isEditingDesc &&
+                <input 
+                  className={styles.editDescription} 
+                  type="text" 
+                  value={item.description} 
+                  name="description"
+                  onChange={changeHandler}
+                >
+                </input>
+              }
+            </div>
+          </div>
+          <div className={rightNavSection} onClick={moveItemRightHandler}>
+            <FontAwesomeIcon className={rightStyles} icon={faChevronRight} />
+          </div>
         </div>
-      </div>
-      <div className={rightNavSection} onClick={moveItemRightHandler}>
-        <FontAwesomeIcon className={rightStyles} icon={faChevronRight} />
-      </div>
-    </div>
+      }
+    </>
   );
 };
 

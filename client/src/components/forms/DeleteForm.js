@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Styles
@@ -12,11 +12,13 @@ import { useDeleteUserMutation } from '../../store/user/userApiSlice';
 import { authActions } from '../../store/auth/authSlice';
 import { userActions } from '../../store/user/userSlice';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../layout/Spinner';
 
 
 const DeleteItemForm = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const itemToDelete = useSelector(state => state.item.itemToDelete);
   const userToDelete = useSelector(state => state.user.userToDelete);
   const [deleteItem, { isDeleteItemLoading }] = useDeleteItemMutation();
@@ -31,16 +33,32 @@ const DeleteItemForm = (props) => {
     event.preventDefault()
 
     if (itemToDelete !== null) {
-      const deletedItemId = await deleteItem(itemToDelete._id).unwrap();
-      dispatch(itemActions.deleteItem(deletedItemId));
-      dispatch(layoutActions.setShowDeleteForm(false));
-      dispatch(itemActions.setItemToDelete(null));
+      try {
+        setIsLoading(true);
+        const deletedItemId = await deleteItem(itemToDelete._id).unwrap();
+        dispatch(itemActions.deleteItem(deletedItemId));
+        dispatch(layoutActions.setShowDeleteForm(false));
+        dispatch(itemActions.setItemToDelete(null));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+
     } else if (userToDelete !== null) {
-      dispatch(authActions.logout());
-      dispatch(layoutActions.setShowDeleteForm(false));
-      dispatch(userActions.setUserToDelete(null));
-      navigate('/register');
-      const deletedUserId = await deleteUser(userToDelete.id).unwrap();
+      try {
+        setIsLoading(true);
+        dispatch(authActions.logout());
+        dispatch(layoutActions.setShowDeleteForm(false));
+        dispatch(userActions.setUserToDelete(null));
+        navigate('/register');
+        const deletedUserId = await deleteUser(userToDelete.id).unwrap();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+
     }
 
   }
@@ -53,17 +71,22 @@ const DeleteItemForm = (props) => {
   }
 
   return (
-    <div className={styles.deleteItemForm}>
-      <div className={styles.warning}>Are you sure you want to delete 
-        {userToDelete && ' User:'}
-        {itemToDelete && ' Item:'}
+    <>
+    {isLoading && <Spinner />}
+    {!isLoading &&
+      <div className={styles.deleteItemForm}>
+        <div className={styles.warning}>Are you sure you want to delete 
+          {userToDelete && ' User:'}
+          {itemToDelete && ' Item:'}
+          </div>
+        {label}
+        <div className={styles.options}>
+          <div className={styles.cancel} onClick={cancelHandler}>Cancel</div>
+          <button className={styles.delete} onClick={deleteHandler}>Delete</button>
         </div>
-      {label}
-      <div className={styles.options}>
-        <div className={styles.cancel} onClick={cancelHandler}>Cancel</div>
-        <button className={styles.delete} onClick={deleteHandler}>Delete</button>
       </div>
-    </div>
+    }
+    </>
   );
 };
 
