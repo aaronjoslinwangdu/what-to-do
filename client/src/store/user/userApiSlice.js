@@ -29,6 +29,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
         headers: headers,
       }),
+      invalidatesTags: ['getUser'],
     }),
   })
 });

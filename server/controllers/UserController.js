@@ -42,13 +42,33 @@ const updateUser = async (req, res) => {
     throw new Error('User not found');
   }
 
-  validateEmail(req.body.email);
-  validateUsername(req.body.username);
-  validatePassword(req.body.password);
+  if (!req.body.username) {
+    return res.status(400).json({ message: 'Please enter a username', type: 'username'});
+  }
+  
+  if (!req.body.email) {
+    return res.status(400).json({ message: 'Please enter an email address', type: 'email' });
+  }
+  
+  const alphanum = /^[a-zA-Z0-9]+$/;
+  if (!alphanum.test(req.body.username)) {
+    return res.status(400).json({ message: 'No special characters allowed', type: 'username' });
+  }
+  
+  const foundUser = await User.findOne({ username: req.body.username }).exec();
 
-  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  if (!(user.username === req.body.username) && foundUser) {
+    return res.status(400).json({ message: 'This username is already taken', type: 'username' });
+  }
+  
+  const foundEmail = await User.findOne({ email: req.body.email }).exec();
+  if (!(user.email === req.body.email) && foundEmail) {
+    return res.status(400).json({ message: 'This email is already taken', type: 'email' });
+  }
 
-  res.status(200).json(updatedUser);
+  await user.updateOne({ username: req.body.username, email: req.body.email, location: req.body.location }).exec();
+
+  res.status(200).json({ id: user._id, username: req.body.username, email: req.body.email, location: req.body.location });
 
 }
 

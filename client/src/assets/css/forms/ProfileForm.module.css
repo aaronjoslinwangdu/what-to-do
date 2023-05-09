@@ -22,6 +22,13 @@
   font-family: 'Roboto Slab', serif;
   font-size: 2rem;
   font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.headerMainText {
+  color: #6bb0d8;
 }
 
 .userSection {
@@ -89,4 +96,38 @@
 
 .delete:hover {
   background-color: #ac2d2d;
+}
+
+.errorMessage {
+  color: #c23535;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.errorInput {
+  border-color: #c23535;
+  background-color: #f5d1d1;
+  font-family: 'Roboto';
+  font-size: 14px;
+  width: 100%;
+  margin: 4px 0 16px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.input {
+  font-family: 'Roboto';
+  font-size: 14px;
+  width: 100%;
+  margin: 4px 0 16px;
+  background-color: #ececec;
+  padding: 12px 20px;
+  border: 2px solid #5f5f5f2c;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: none;
 }
