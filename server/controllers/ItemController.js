@@ -97,7 +97,6 @@ const deleteItem = async (req, res) => {
     throw new Error('Item not found');
   }
 
-  console.log(item);
   await item.deleteOne();
 
   res.status(200).json({ id: req.params.id });

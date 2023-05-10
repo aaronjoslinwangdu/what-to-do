@@ -27,13 +27,13 @@ const login = async (req, res) => {
   const accessToken = jwt.sign(
     { 'email': user.email }, 
     process.env.ACCESS_TOKEN_SECRET, 
-    { expiresIn: '5m' }
+    { expiresIn: '15m' }                   
   );
 
   const refreshToken = jwt.sign(
     { 'email': user.email }, 
     process.env.REFRESH_TOKEN_SECRET, 
-    { expiresIn: '1d' }
+    { expiresIn: '7d' }                    
   );
 
   await RefreshToken.create({ token: refreshToken, userId: user._id });
@@ -59,8 +59,6 @@ const login = async (req, res) => {
 // @desc    Sign users out
 // @route   POST /auth/logout
 const logout = async (req, res) => {
-
-  // on client, also delete the accessToken IN FRONTEND !!!!
 
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(204);
@@ -126,15 +124,14 @@ const register = async (req, res) => {
   const accessToken = jwt.sign(
     { 'email': user.email }, 
     process.env.ACCESS_TOKEN_SECRET, 
-    { expiresIn: '5m' }
+    { expiresIn: '15m' }
   );
 
   const refreshToken = jwt.sign(
     { 'email': user.email }, 
     process.env.REFRESH_TOKEN_SECRET, 
-    { expiresIn: '1d' }
+    { expiresIn: '7d' }
   );
-
 
   await RefreshToken.create({ token: refreshToken, userId: user._id });
 

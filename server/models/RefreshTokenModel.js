@@ -13,7 +13,7 @@ const refreshTokenSchema = mongoose.Schema({
   expireAt: {
     type: Date,
     default: Date.now,
-    index: { expires: 24 * 60 * 60 * 1000 }
+    index: { expires: 7 * 24 * 60 * 60 * 1000 }
   }
 });
 

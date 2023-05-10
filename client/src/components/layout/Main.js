@@ -19,7 +19,9 @@ const Main = () => {
   
   let columns = [];
 
-  dispatch(itemActions.setItems(itemsList));
+  useEffect(() => {
+    dispatch(itemActions.setItems(itemsList));
+  }, [itemsList]);
 
   let itemsColumns = [[],[],[]];
   if (items && items.length !== 0) {

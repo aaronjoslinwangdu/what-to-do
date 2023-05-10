@@ -29,6 +29,7 @@ const Item = (props) => {
   const [isEditingLabel, setIsEditingLabel] = useState(false);
   const [isEditingDesc, setIsEditingDesc] = useState(false);
   const [isEditingStatus, setIsEditingStatus] = useState(false);
+  const [isItemLoading, setIsItemLoading] = useState(false);
 
   const deleteItemHandler = () => {
     dispatch(layoutActions.setShowDeleteForm(true));
@@ -68,26 +69,50 @@ const Item = (props) => {
   }
   
   const saveItemHandler = async () => {
-    const savedItem = await updateItem(item).unwrap();
-    setIsEditingLabel(false);
-    setIsEditingDesc(false);
-    setIsEditingStatus(false);
-    dispatch(itemActions.updateItem(savedItem));
+    try {
+      setIsItemLoading(true);
+      const savedItem = await updateItem(item).unwrap();
+      setIsEditingLabel(false);
+      setIsEditingDesc(false);
+      setIsEditingStatus(false);
+      dispatch(itemActions.updateItem(savedItem)); 
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log('finished saving item');
+      setIsItemLoading(false);
+    }
   }
 
   const moveItemLeftHandler = async () => {
     if (item.status !== 0) {
       let tempItem = {...item, status: item.status - 1};
-      const savedItem = await updateItem(tempItem).unwrap();
-      dispatch(itemActions.updateItem(savedItem));
+      try {
+        setIsItemLoading(true);
+        const savedItem = await updateItem(tempItem).unwrap();
+        dispatch(itemActions.updateItem(savedItem));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.log('finished moving item left');
+        setIsItemLoading(false);
+      }
     }
   }
 
   const moveItemRightHandler = async () => {
     if (item.status !== 2) {
       let tempItem = {...item, status: item.status + 1};
-      const savedItem = await updateItem(tempItem).unwrap();
-      dispatch(itemActions.updateItem(savedItem));
+      try {
+        setIsItemLoading(true);
+        const savedItem = await updateItem(tempItem).unwrap();
+        dispatch(itemActions.updateItem(savedItem));        
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.log('finished moving item right');
+        setIsItemLoading(false);
+      }
     }
   }
 
@@ -99,8 +124,8 @@ const Item = (props) => {
 
   return (
     <>
-      {isLoading && <Spinner />}
-      {!isLoading &&
+      {(isLoading || isItemLoading) && <Spinner />}
+      {!isLoading && !isItemLoading && 
         <div className={styles.item}>
           <div className={leftNavSection} onClick={moveItemLeftHandler}>
             <FontAwesomeIcon className={leftStyles} icon={faChevronLeft} />
