@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { authActions } from "./authSlice";
 
 const headers = {
   'Access-Control-Allow-Origin': 'http://localhost:3000',
@@ -30,6 +31,21 @@ export const authApiSlice = apiSlice.injectEndpoints({
         headers: headers,
       })
     }),
+    refresh: builder.mutation({
+      query: () => ({
+        url: '/refresh',
+        method: 'GET',
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          const { accessToken, user } = data;
+          dispatch(authActions.setCredentials({ accessToken, user }));
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }),
   })
 });
 
@@ -37,4 +53,5 @@ export const {
   useLoginMutation, 
   useLogoutMutation,
   useRegisterMutation,
+  useRefreshMutation,
 } = authApiSlice;

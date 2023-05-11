@@ -57,15 +57,26 @@
 .buttonSection {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.buttonSectionRegister {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
   width: 80%;
   gap: 10px;
   margin-top: 10px;
   margin-bottom: 30px;
 }
 
-.buttonSection button {
+.buttonSection button,
+.buttonSectionRegister button {
   font-family: 'Roboto';
   font-size: 14px;
   font-weight: 600;
@@ -78,11 +89,21 @@
   text-align: center;
 }
 
-.buttonSection button:hover {
+.buttonSubsection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.buttonSection button:hover,
+.buttonSectionRegister button:hover {
   background-color: #3f5c92;
 }
 
-.buttonSection div:hover {
+.buttonSection div:hover,
+.buttonSectionRegister div:hover {
   cursor: pointer;
   text-decoration: underline;
 }
@@ -99,4 +120,10 @@
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 10px;
+}
+
+.rememberMessage {
+  font-size: 14px;
+  font-weight: 700;
+  color: #494949;
 }

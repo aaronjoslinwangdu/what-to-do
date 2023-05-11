@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+// Hooks
+import usePersist from '../../hooks/usePersist';
 
 // Styles
 import styles from '../../assets/css/forms/LoginForm.module.css';
@@ -12,10 +14,13 @@ import { authActions } from '../../store/auth/authSlice';
 import { useLoginMutation } from '../../store/auth/authApiSlice';
 
 
+
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
+  const [persist, setPersist] = usePersist();
+
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -26,6 +31,10 @@ const LoginForm = () => {
     email: null,
     password: null,
   });
+
+  const persistHandler = () => {
+    setPersist(prev => !prev);
+  }
 
   const changeHandler = (event) => {
     setFormState({
@@ -110,8 +119,19 @@ const LoginForm = () => {
       </div>
 
       <div className={styles.buttonSection}>
-        <Link to='/register'>Register</Link>
-        <button type='submit'>Log in</button>
+        <label className={styles.rememberMessage} htmlFor='persist'>
+        <input 
+          type='checkbox'
+          id='persist'
+          onChange={persistHandler}
+          checked={persist}
+        />
+          Remember me?
+        </label>
+        <div className={styles.buttonSubsection}>
+          <Link to='/register'>Register</Link>
+          <button type='submit'>Log in</button>
+        </div>
       </div>
 
     </form>

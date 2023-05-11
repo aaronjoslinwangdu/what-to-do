@@ -188,9 +188,9 @@ const RegisterForm = () => {
         />
       </div>
 
-      <div className={styles.buttonSection}>
-        <Link to='/login'>Log in</Link>
-        <button type='submit'>Create</button>
+      <div className={styles.buttonSectionRegister}>
+          <Link to='/login'>Log in</Link>
+          <button type='submit'>Create</button>
       </div>
 
     </form>

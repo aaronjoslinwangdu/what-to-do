@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage';
 import Layout from './components/routing/Layout';
 import RequireAuth from './components/routing/RequireAuth';
 import TestPage from './pages/TestPage';
+import PersistLogin from './components/routing/PersistLogin';
 
 function App() {
   return (
@@ -23,8 +24,10 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
 
         {/* Protected Routes */}
-        <Route element={<RequireAuth />}>
-          <Route path="/dashboard" element={<ItemPage />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/dashboard" element={<ItemPage />} />
+          </Route>
         </Route>
 
     </Routes>
