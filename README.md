@@ -1,10 +1,3 @@
-<br>
-
-<p align="center">
-<a href="https://github.com/aaronjoslinwangdu><img width="200" src="./client/public/WhatToDo-Logo.png" alt="WhatToDo Logo"></a>
-</p>
-
-<br>
 
 # WhatToDo
 
