@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Fonts
 import './assets/css/fonts.css';
@@ -19,7 +19,7 @@ function App() {
       <Route path="/" element={<Layout />} />
 
         {/* Public routes */}
-        <Route index element={<TestPage />} />
+        <Route index element={<Navigate to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
