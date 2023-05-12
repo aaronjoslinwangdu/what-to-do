@@ -21,7 +21,6 @@ const Sidebar = () => {
       </div>
       <div className={styles.sidebarItems}>
         <Add/>
-        <Select />
         <Profile />
         <Logout />
       </div>
