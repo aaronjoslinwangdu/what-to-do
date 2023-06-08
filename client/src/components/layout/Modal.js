@@ -9,6 +9,7 @@ import styles from '../../assets/css/layout/Modal.module.css';
 import { layoutActions } from '../../store/layout/layoutSlice';
 import { itemActions } from '../../store/items/itemSlice';
 import { userActions } from '../../store/user/userSlice';
+import { formActions } from '../../store/form/formSlice';
 
 
 
@@ -19,6 +20,7 @@ const Modal = (props) => {
     dispatch(layoutActions.hideAllForms());
     dispatch(itemActions.setItemToDelete(null));
     dispatch(userActions.setUserToDelete(null));
+    dispatch(formActions.setAddItemStatus(0));
   }
 
   const Backdrop = (props) => {

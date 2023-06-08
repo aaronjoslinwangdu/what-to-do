@@ -31,16 +31,7 @@ const Main = () => {
   }
 
   columns = itemsColumns.map((itemsInCol, index) => {
-
-    let columnLabel;
-    switch(index) {
-      case 0: columnLabel = 'To Do'; break;
-      case 1: columnLabel = 'In Progress'; break;
-      case 2: columnLabel = 'Done'; break;
-    }
-
-    return <MainColumn key={index} label={columnLabel} items={itemsInCol} />
-
+    return <MainColumn key={index} status={index} items={itemsInCol} />
   });
 
 

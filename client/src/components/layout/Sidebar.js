@@ -20,7 +20,7 @@ const Sidebar = () => {
         <Brand />
       </div>
       <div className={styles.sidebarItems}>
-        <Add/>
+        <Add type={'sidebar'} />
         <Profile />
         <Logout />
       </div>

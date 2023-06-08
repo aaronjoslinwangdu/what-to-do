@@ -13,11 +13,13 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useAddItemMutation } from '../../store/items/itemsApiSlice';
 import DatePicker from 'react-datepicker';
 import Spinner from '../layout/Spinner';
+import { formActions } from '../../store/form/formSlice';
 
 const AddItemForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   const items = useSelector(state => state.item.items);
+  const initialStatus = useSelector(state => state.form.addItemStatus);
   const [isLoading, setIsLoading] = useState(false);
   const [addItem] = useAddItemMutation();
   const [formErrors, setFormErrors] = useState({ label: null });
@@ -32,12 +34,13 @@ const AddItemForm = () => {
     description: "",
     date: new Date(), 
     folder: 1,
-    status: 0,
+    status: initialStatus,
     userId: user.id
   });
 
   const cancelHandler = (event) => {
     event.preventDefault();
+    dispatch(formActions.setAddItemStatus(0));
     dispatch(layoutActions.setShowAddItemForm(false));
   }
 
