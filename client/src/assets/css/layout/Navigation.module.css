@@ -8,3 +8,26 @@
   align-items: center;
   border-bottom: 1px solid #5f5f5f38;
 }
+
+.navigationProfile {
+  margin-right: 35px;
+}
+
+.headerText {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.headerMainText {
+  color: #6bb0d8;
+}
+
+.headerMainText:hover {
+  color: #8ccc42;
+  cursor: pointer;
+  text-decoration: underline;
+}
