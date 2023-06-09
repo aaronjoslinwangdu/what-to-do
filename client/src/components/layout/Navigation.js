@@ -5,7 +5,7 @@ import styles from '../../assets/css/layout/Navigation.module.css';
 const NavigationTop = () => {
   return (
     <nav className={styles.navigation}>
-      <div></div>
+      <div>Hello</div>
     </nav>
   );
 };

@@ -33,16 +33,20 @@ const ItemPage = () => {
   }
 
   return (
-    <Fragment>
+    <div className={styles.itemPage}>
       {modal}
       <div className={styles.regionSidebar}>
         <Sidebar />
-        <div className={styles.regionContent}>
+      </div>
+      <div className={styles.regionContent}>
+        <div className={styles.regionNav}>
           <Navigation />
+        </div>
+        <div className={styles.regionMain}>
           <Main />
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
